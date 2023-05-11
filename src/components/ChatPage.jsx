@@ -1,13 +1,20 @@
 import React from 'react'
 import ChatHeader from './ChatHeader'
 import ChatInput from './ChatInput'
+import ChatBody from './ChatBody'
 
 const ChatPage = () => {
   return (
     <>  
-      <ChatHeader />  
-      <ChatInput />
-      <div></div> 
+      <div style={{ 
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+      }}>
+        <ChatHeader /> 
+        <ChatBody /> 
+        <ChatInput />
+      </div> 
     </>
   )
 }
