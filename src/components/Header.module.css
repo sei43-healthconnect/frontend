@@ -1,0 +1,117 @@
+.header {
+  /* Global Nav */
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 12px;
+  gap: 18px;
+
+  position: absolute;
+  height: 64px;
+  left: 0%;
+  right: 0%;
+  top: 106px;
+
+  /* M3/sys/light/primary */
+
+  background: #004b64;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.menu {
+  /* Hamburger */
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  gap: 4px;
+
+  width: 50px;
+  height: 50px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.middle {
+  /* Logo-Horizontal */
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 6px;
+
+  width: 173.73px;
+  height: 47.73px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.text {
+  /* HealthConnect */
+
+  width: 120px;
+  height: 24px;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  /* identical to box height, or 133% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  /* M3/sys/light/on-primary */
+
+  color: #ffffff;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.bell {
+  /* Bell */
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  gap: 4px;
+
+  width: 30px;
+  height: 30px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
