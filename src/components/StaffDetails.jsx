@@ -45,9 +45,6 @@ const StaffDetails = () => {
           </div>
         </button>
       </div>
-      {/* <div className={styles.AccountSettingsBox}>
-        <div className={styles.AccountSettings}>Account Settings</div>
-      </div> */}
     </>
   );
 };

@@ -17,9 +17,9 @@ function App() {
       }}>
         <Header />
         <SubHeader />
-        {/* <HomePage /> */}
-        {/* <ChatPage />  */}
-        <FamilyPatient />
+        <HomePage />
+        {/* <FamilyPatient />
+        <ChatPage />  */}
 
 
       </div>
