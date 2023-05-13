@@ -32,3 +32,11 @@
   font-style: normal;
   color: black;
 }
+
+.right-side {
+  margin-left: auto;
+}
+
+.left-side {
+  margin-right: auto;
+}

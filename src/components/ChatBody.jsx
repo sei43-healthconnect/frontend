@@ -5,6 +5,8 @@ import ChatMessage from './ChatMessage'
 const ChatBody = () => {
   const [messages, setMessages] = useState({})
 
+  
+
   return (
     <div className={styles['main-container']}>
       { messages.length > 0 &&
