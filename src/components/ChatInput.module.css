@@ -3,4 +3,8 @@
   padding: 1.5rem;
   background-color: #EEEEEE;
   height: fit-content;
+
+  overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
 }
