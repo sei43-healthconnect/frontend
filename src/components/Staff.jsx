@@ -8,6 +8,13 @@ const Staff = (props) => {
         <div className="col-sm-3">{props.staff_lastName}</div>
         <div className="col-sm-2">{props.staff_firstName}</div>
       </div>
+      <div className="row">
+        <div className="col-sm-3">{props.patient_firstName}</div>
+        <div className="col-sm-3">{props.patient_lastName}</div>
+        <div className="col-sm-2">{props.patient_firstName}</div>
+      </div>
+
+
     </>
   );
 };

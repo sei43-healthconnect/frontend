@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchData } from "../helpers/common";
 
 const StaffDisplay = () => {
   const [allStaff, setAllStaff] = useState([]);
-  const [oneStaff, setOneStaff] = useState([]);
+  const [staff, setStaff] = useState([]);
+  const [allPatients, setAllPatients] = useState([]);
+  const [patient, setPatient] = useState([]);
 
-  // This GET works
+  // This GET all staff works
   const getAllStaff = async () => {
     const { ok, data } = await fetchData("/api/staff");
     console.log("AllStaff:");
@@ -17,40 +19,90 @@ const StaffDisplay = () => {
     }
   };
 
-  const getOneStaff = async () => {
-    const { ok, data } = await fetchData("/api/staff", "POST", {
-      id: "6454e24f9d39467f4d224a86",
+  // This GET all patients works
+  const getAllPatients = async () => {
+    const { ok, data } = await fetchData("/api/patients");
+    console.log("AllPatients:");
+    console.log(data);
+    if (ok) {
+      setAllPatients(data);
+    } else {
+      console.log(data);
+    }
+  };
+
+  // GET a staff by his NRIC Number
+  const getStaffByNric = async () => {
+    const { ok, data } = await fetchData("/api/staff/nric", "POST", {
+      staff_nric: "t1778359x",
     });
-    console.log("One Staff, Firstname:");
-    console.log(data.staff_firstName);
+    console.log("One Staff:");
+    console.log(data.staff_firstName, data.staff_lastName, data.staff_ward[0]);
 
     if (ok) {
-      setOneStaff(data);
+      setStaff(data);
+    } else {
+      console.log(data);
+    }
+  };
+
+  // GET a patient by his NRIC Number
+  const getPatientByNric = async () => {
+    const { ok, data } = await fetchData("/api/patients/nric", "POST", {
+      patient_nric: "t1778359x",
+    });
+
+    if (ok) {
+      setPatient(data);
     } else {
       console.log(data);
     }
   };
 
   useEffect(() => {
+    getAllPatients();
     getAllStaff();
-    getOneStaff();
+    getPatientByNric();
+    getStaffByNric();
   }, []);
 
   return (
-    <div>
-      <div>One Staff: </div>
-      <div>{oneStaff.staff_gender}</div>
-      <div>{oneStaff.staff_firstName}</div>
-      <div>{oneStaff.staff_lastName}</div>
-      <div>{oneStaff.staff_ward[0]}</div>
-      <div>{oneStaff.staff_ward[1]}</div>
-      <div>{oneStaff.staff_ward[2]}</div>
+    <>
+      <div className="row">
+        <div>One Staff: </div>
+        <div>
+          <div>{staff.staff_gender}</div>
+          <div>{staff.staff_firstName}</div>
+          <div>{staff.staff_lastName}</div>
+        </div>
+        <br />
+        // to check if allStaff works
+        <div>All Staff</div>
+        {allStaff.map((item) => {
+          return <div>{item.staff_hospitalId}</div>;
+        })}
+      </div>
 
-      {/* <div>All Staff</div>
-      {allStaff.map((item) => {
-        return <div>{item.staff_hospitalId}</div>;
-      })} */}
-    </div>
+      <div className="row">
+        <div>One Patient: </div>
+        <div>
+          <div>{patient.patient_gender}</div>
+          <div>{patient.patient_firstName}</div>
+          <div>{patient.patient_lastName}</div>
+        </div>
+        <br />
+        // To check if allPatients works
+        <div>// All Patients //</div>
+        {allPatients.map((item) => {
+          return (
+            <div>
+              Last Name: {item.patient_lastName}, First Name:
+              {item.patient_firstName}, NRIC: {item.patient_nric}
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
