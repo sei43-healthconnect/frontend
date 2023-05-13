@@ -3,14 +3,25 @@ import ChatPage from "./components/ChatPage";
 import ChatInput from "./components/ChatInput";
 import HomePage from "./components/HomePage";
 import FamilyPatient from "./components/FamilyPatient";
+import Header from "./components/Header";
+import SubHeader from "./components/SubHeader";
 
 function App() {
   return (
     <div className="centered">
-      <div>
-        {/* <ChatPage /> */}
-        <HomePage />
-        {/* <FamilyPatient /> */}
+      <div style={{
+        width: '420px',
+        height: '100vh',
+        display: 'flex',
+        flexFlow: 'column'
+      }}>
+        <Header />
+        <SubHeader />
+        {/* <HomePage /> */}
+        {/* <ChatPage />  */}
+        <FamilyPatient />
+
+
       </div>
     </div>
   );

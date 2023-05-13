@@ -7,8 +7,6 @@ import StaffDetails from "./StaffDetails";
 const HomePage = () => {
   return (
     <div className={styles.HomePage}>
-      <Header />
-      <SubHeader />
       <StaffDetails />
     </div>
   );

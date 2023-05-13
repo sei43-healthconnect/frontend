@@ -10,11 +10,11 @@
   padding: 0px 12px;
   gap: 4px;
 
-  position: absolute;
+  /* position: absolute; */
   height: 48px;
-  left: 0px;
+  /* left: 0px;
   right: 0px;
-  top: 170px;
+  top: 170px; */
 
   background: #f7f7f7;
 }

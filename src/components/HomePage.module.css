@@ -1,11 +1,12 @@
 .HomePage {
   /* Staff Dashboard */
 
-  position: relative;
-  width: 411px;
-  height: 823px;
-  left: 56px;
-  top: 100px;
+  /* position: relative; */
+  /* width: 411px; */
+  height:100vh;
+  width: auto;
+  /* left: 56px; */
+  /* top: 100px; */
 
   background: #ffffff;
   border-radius: 18px;

@@ -1,13 +1,12 @@
 import React from "react";
 import styles from "./FamilyPatient.module.css";
 import Header from "./Header";
-import { Avatar } from "@mui/material";
+import { Avatar, Badge } from "@mui/material";
 import Patient1 from "./Images/Patient1.png";
 
 const FamilyPatient = () => {
   return (
     <div className={styles.FamilyPatient}>
-      <Header />
       <div className={styles.MyCareDisplay}>
         <div className={styles.MyCare}>My Care</div>
       </div>
@@ -38,12 +37,14 @@ const FamilyPatient = () => {
         </div>
         <div className={styles.ButtonBox}>
           <div className={styles.Button2Box}>
-            <div className={styles.MessageStaffBox}>
-              <div className={styles.MessageStaffText}>Message Staff</div>
-            </div>
-            <div className={styles.badge}>
+            <Badge badgeContent={10} color='primary'>
+              <div className={styles.MessageStaffBox}>
+                <div className={styles.MessageStaffText}>Message Staff</div>
+              </div>
+            </Badge>
+            {/* <div className={styles.badge}>
               <div className={styles.badge1}>10</div>
-            </div>
+            </div> */}
             <div className={styles.PatientDetailsTextBox}>
               <div className={styles.PatientDetailsText}>Patient's Details</div>
             </div>
