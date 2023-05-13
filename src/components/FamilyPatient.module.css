@@ -530,6 +530,8 @@ Badges are used to indicate a notification, item count, or other information rel
   align-self: stretch;
   flex-grow: 0;
   z-index: 2;
+
+  background-color: white;
 }
 .PatientDetailsText {
   /* label-text */

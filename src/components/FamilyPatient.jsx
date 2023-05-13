@@ -38,15 +38,15 @@ const FamilyPatient = () => {
         </div>
         <div className={styles.ButtonBox}>
           <div className={styles.Button2Box}>
-            <div className={styles.MessageStaffBox}>
+            <button className={styles.MessageStaffBox}>
               <div className={styles.MessageStaffText}>Message Staff</div>
-            </div>
+            </button>
             <div className={styles.badge}>
               <div className={styles.badge1}>10</div>
             </div>
-            <div className={styles.PatientDetailsTextBox}>
+            <button className={styles.PatientDetailsTextBox}>
               <div className={styles.PatientDetailsText}>Patient's Details</div>
-            </div>
+            </button>
           </div>
         </div>
       </div>

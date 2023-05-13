@@ -9,8 +9,8 @@ function App() {
     <div className="centered">
       <div>
         {/* <ChatPage /> */}
-        {/* <HomePage /> */}
-        <FamilyPatient />
+        <HomePage />
+        {/* <FamilyPatient /> */}
       </div>
     </div>
   );
