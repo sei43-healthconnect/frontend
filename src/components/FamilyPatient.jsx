@@ -4,6 +4,8 @@ import Header from "./Header";
 import { Avatar } from "@mui/material";
 import Patient1 from "./Images/Patient1.png";
 import { fetchData } from "../helpers/common";
+import PatientContext from "../context/patient";
+// import VerificationModal from "./VerificationModal";
 
 const FamilyPatient = () => {
   const [patients, setPatients] = useState([]);
@@ -36,7 +38,14 @@ const FamilyPatient = () => {
 
   return (
     <>
-      {showVerificationModal && <VerificationModal />}
+      {showVerificationModal && (
+        <VerificationModal
+          ic={patient_nric}
+          setShowVerificationModal={setShowVerificationModal}
+          getPatients={getPatients}
+        />
+      )}
+
       <div className={styles.FamilyPatient}>
         <Header />
         <div className={styles.MyCareDisplay}>
@@ -47,14 +56,15 @@ const FamilyPatient = () => {
             <Avatar
               alt="Patient1"
               src={Patient1}
+              // src={patients[0].patient_photo}
               sx={{ width: 96, height: 96 }}
             />
             <div className={styles.PatientDetailsBox}>
               <div className={styles.PatientNameBox}>
                 <div className={styles.PatientName}>Patient Name</div>
                 <div className={styles.PatientNameText}>
-                  {/* {patient_firstName} */}
-                  {/* {patient_lastName} */}
+                  {/* {patients[0].patient_firstName} */}
+                  {/* {patients[0].patient_lastName} */}
                   Kah Poh Tian
                 </div>
               </div>
@@ -64,16 +74,16 @@ const FamilyPatient = () => {
                   Ang Mo Kio Community Hospital
                 </div>
                 <div className={styles.WardNoBedNo}>
-                  {/* {patient_ward} */}
-                  Ward 46 /{/* {patient_bed} */}
+                  {/* {patients[0].patient_ward} */}
+                  Ward 46 /{/* {patients[0].patient_bed} */}
                   Bed 1
                 </div>
               </div>
               <div className={styles.StaffNameBox}>
                 <div className={styles.StaffName}>Staff Name</div>
                 <div className={styles.StaffNameText}>
-                  {/* {staff_firstName} */}
-                  {/* {staff_lastName} */}
+                  {/* {staffs[0].staff_firstName} */}
+                  {/* {staffs[0].staff_lastName} */}
                   Staff Nurse Mabel See
                 </div>
               </div>
@@ -81,7 +91,10 @@ const FamilyPatient = () => {
           </div>
           <div className={styles.ButtonBox}>
             <div className={styles.Button2Box}>
-              <button className={styles.MessageStaffBox}>
+              <button
+                className={styles.MessageStaffBox}
+                onClick={() => setShowVerificationModal(true)}
+              >
                 <div className={styles.MessageStaffText}>Message Staff</div>
               </button>
               <div className={styles.badge}>
