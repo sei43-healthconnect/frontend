@@ -31,8 +31,23 @@
   padding: 4px;
   gap: 4px;
 
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.hamburger {
+  /* Icons/menu_24px
+
+menu, hamburger, lines, line
+*/
+
+  width: 48px;
+  height: 48px;
 
   /* Inside auto layout */
 
@@ -91,7 +106,7 @@
   flex-grow: 0;
 }
 
-.bell {
+.notification {
   /* Bell */
 
   /* Auto layout */
@@ -103,12 +118,24 @@
   padding: 4px;
   gap: 4px;
 
-  width: 30px;
-  height: 30px;
+  width: 48px;
+  height: 48px;
 
   /* Inside auto layout */
 
   flex: none;
   order: 2;
+  flex-grow: 0;
+}
+.bell {
+  /* Elements / Icons / bell */
+
+  width: 24px;
+  height: 24px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
   flex-grow: 0;
 }

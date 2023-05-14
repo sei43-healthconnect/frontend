@@ -27,17 +27,15 @@ const StaffDetails = () => {
       </div>
       <div className={styles.WardsBox}>
         <div className={styles.WardsFrame}>
-          <div className={styles.WardsButton}>
+          <button className={styles.WardsButton}>
             <div className={styles.WardNo}>46</div>
-          </div>
-          <div className={styles.WardsButton}>
-            {" "}
+          </button>
+          <button className={styles.WardsButton}>
             <div className={styles.WardNo}>47</div>
-          </div>
-          <div className={styles.WardsButton}>
-            {" "}
+          </button>
+          <button className={styles.WardsButton}>
             <div className={styles.WardNo}>48</div>
-          </div>
+          </button>
         </div>
         <button className={styles.AddButton}>
           <div className={styles.layer}>
