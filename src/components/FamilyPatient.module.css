@@ -260,7 +260,7 @@
   order: 1;
   flex-grow: 0;
 }
-.wardNoBedNo {
+.WardNoBedNo {
   /* Ward 46 / Bed 1 */
 
   width: 115px;
@@ -530,6 +530,8 @@ Badges are used to indicate a notification, item count, or other information rel
   align-self: stretch;
   flex-grow: 0;
   z-index: 2;
+
+  background-color: white;
 }
 .PatientDetailsText {
   /* label-text */
