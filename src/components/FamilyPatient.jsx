@@ -4,7 +4,6 @@ import Header from "./Header";
 import { Avatar, Badge } from "@mui/material";
 import Patient1 from "./Images/Patient1.png";
 import { fetchData } from "../helpers/common";
-import PatientContext from "../context/patient";
 // import VerificationModal from "./VerificationModal";
 
 const FamilyPatient = () => {
