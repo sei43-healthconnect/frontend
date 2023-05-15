@@ -8,6 +8,8 @@
 
   background: #ffffff;
   border-radius: 18px;
+
+  z-index: 10px;
 }
 .MyCareDisplay {
   /* Frame 15 */
