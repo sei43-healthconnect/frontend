@@ -10,10 +10,6 @@
   justify-content: right;
 }
 
-.message-details .right-side {
-  margin-left: auto;
-}
-
 .sender, .time-stamp {
   padding: 0.5rem 0.75rem;
   color: #605D64;
