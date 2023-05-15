@@ -13,7 +13,7 @@ function App() {
   const [userID, setUserID] = useState('6454e24f9d39467f4d224a74')
 
   // staff or contact
-  const [role, setRole] = useState('')
+  const [role, setRole] = useState('staff')
 
   // for staff - this will be set after Ward+Bed are selected
   // for contact - this will be set after login

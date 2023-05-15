@@ -1,9 +1,34 @@
 import { Button, Container, IconButton, Stack, TextField } from "@mui/material";
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
-import React from "react";
+import React, { useContext, useState } from "react";
+import UserContext from "../context/user"
 import styles from './ChatInput.module.css'
+import { fetchData } from '../helpers/common'
 
 const ChatInput = () => {
+  const userCtx = useContext(UserContext)
+  const [input, setInput] = useState('')
+  
+
+  const putChat = async() => {
+    const { ok, data } = await fetchData('/api/chats/', "PUT", {
+      chat_id: userCtx.patient,
+      msg_senderId: userCtx.userID,
+      msg_fromNurse: userCtx.role == 'staff' ? true: false,
+      msg_isRead: false,
+      msg_timeSent: new Date(),
+      msg_content: input,
+    })
+
+    if (ok) {
+      console.log('chat added')
+      setInput('')
+    } else {
+      console.log('failed to send message')
+    }
+  }
+
+
   return (
     <div className={ styles['main-container'] }>
       <Stack direction="row" spacing={1} >
@@ -51,8 +76,10 @@ const ChatInput = () => {
           //     fontSize: "1rem",
           //   },
           // }}
+          value={input}
+          onChange={(e)=> setInput(e.target.value)}
         />
-        <IconButton size="small" sx={{ flexGrow: 0 }}> 
+        <IconButton size="small" sx={{ flexGrow: 0 }} onClick={putChat}  > 
           <SendRoundedIcon fontSize="inherit" />
         </IconButton>
       </Stack>

@@ -52,7 +52,7 @@ const ChatMessage = (props) => {
     <div className={styles["main-container"]}>
       
         <div className={styles["message-details"]} style={ messageDetails.msg_senderId === userDetails.userID ? { marginLeft: 'auto'} : {marginRight : 'auto'} }  >
-          <div className={styles["sender"]}>{senderName}</div>
+          <div className={styles["sender"]}>{messageDetails.msg_senderId}</div>
           <div className={styles["message-text"]} style={messageBoxStyling}>{messageDetails.msg_content}</div>
           <div className={styles["time-stamp"]}>
             <input

@@ -41,10 +41,10 @@ const ChatBody = () => {
     <div className={styles['main-container']}>
       { Object.keys(messages).length > 0 &&
         // If messages exist, render all the messages
-        Object.keys(messages).map((dateKey)=> {
+        Object.keys(messages).map((dateKey, idx)=> {
           return (
           <>
-            <ChatDateHeader date={dateKey}/>
+            <ChatDateHeader date={dateKey} key={`dateHeader${idx}`}/>
             {messages[dateKey].map((message) => {
               return (<ChatMessage id={message._id} key={message._id} message={message}/>)
             })}     
