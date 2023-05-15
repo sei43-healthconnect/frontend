@@ -3,11 +3,11 @@ import styles from './ChatBody.module.css'
 import ChatMessage from './ChatMessage'
 import UserContext from "../context/user"
 import { fetchData } from '../helpers/common'
-import ChatTimeHeader from './ChatTimeHeader'
+import ChatDateHeader from './ChatDateHeader'
 
 const ChatBody = () => {
   const userCtx = useContext(UserContext)
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState({})
 
   const getMessages = async () => {
     const { ok, data } = await fetchData('/api/chats/id', "POST", {
@@ -15,7 +15,18 @@ const ChatBody = () => {
     })
 
     if (ok) {
-      setMessages(data)
+      var response = data
+      response.map((message)=> {
+        message.Date = new Date(message.msg_timeSent).toLocaleDateString('en-us', { year: 'numeric', month: 'short', day: 'numeric' })
+      })
+      
+      var partitioned = response.reduce(function (r, a) {
+        r[a.Date] = r[a.Date] || [];
+        r[a.Date].push(a);
+        return r;
+      }, Object.create(null));
+
+      setMessages(partitioned)
     } else {
       console.log(data)
     }
@@ -28,12 +39,16 @@ const ChatBody = () => {
 
   return (
     <div className={styles['main-container']}>
-      <ChatTimeHeader />
-      { messages.length > 0 &&
+      { Object.keys(messages).length > 0 &&
         // If messages exist, render all the messages
-        messages.map((message)=> {
+        Object.keys(messages).map((dateKey)=> {
           return (
-          <ChatMessage id={message._id} key={message._id} message={message}/>)
+          <>
+            <ChatDateHeader date={dateKey}/>
+            {messages[dateKey].map((message) => {
+              return (<ChatMessage id={message._id} key={message._id} message={message}/>)
+            })}     
+          </>) 
         })     
       }
     </div>

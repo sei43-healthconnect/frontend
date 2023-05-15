@@ -18,7 +18,7 @@ const ChatMessage = (props) => {
     if (ok) {
       setRead(true)
     } else {
-      console.log('failed read')
+      console.log('failed to set read')
     }
   }
 
@@ -64,8 +64,7 @@ const ChatMessage = (props) => {
               disabled={read}
               
               onChange={readMessage}
-              style={{ paddingRight: '0.25rem' }}
-            />
+            />{` `}
             {formatAMPM(new Date(messageDetails.msg_timeSent))}
           </div>
         </div>

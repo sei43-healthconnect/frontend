@@ -1,13 +1,14 @@
 .main-container {
   width: 100%;
   height: fit-content;
-  padding: 24px 40px;
+  padding: 0px 40px;
 }
 
 .message-details {
   max-width: 75%;
   width: auto;
   justify-content: right;
+  margin-top: 0;
 }
 
 .sender, .time-stamp {
