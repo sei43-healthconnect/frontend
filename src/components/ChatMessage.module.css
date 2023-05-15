@@ -5,8 +5,13 @@
 }
 
 .message-details {
+  max-width: 75%;
   width: auto;
   justify-content: right;
+}
+
+.message-details .right-side {
+  margin-left: auto;
 }
 
 .sender, .time-stamp {
@@ -16,21 +21,31 @@
   font-style: normal;
   font-size: 0.75rem;
   line-height: 1rem;
+  text-align: right;
 }
 
 .message-text {
-  max-width: 60%;
+  position: relative;
+  display: block;
+  word-wrap: break-word;
+
   width: fit-content;
+  max-width: 100%;
   border-radius: 0.75rem;
   border-style: solid;
   border-width: 1px;
-  padding: 0.75rem;
+  padding: 0.75rem 0.5rem;
 
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25rem;
   font-style: normal;
   color: black;
+  text-align: left;
+}
+
+.message-text .right-side {
+  margin-left: auto;
 }
 
 .right-side {
