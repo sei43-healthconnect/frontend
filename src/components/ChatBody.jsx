@@ -3,6 +3,7 @@ import styles from './ChatBody.module.css'
 import ChatMessage from './ChatMessage'
 import UserContext from "../context/user"
 import { fetchData } from '../helpers/common'
+import ChatTimeHeader from './ChatTimeHeader'
 
 const ChatBody = () => {
   const userCtx = useContext(UserContext)
@@ -27,6 +28,7 @@ const ChatBody = () => {
 
   return (
     <div className={styles['main-container']}>
+      <ChatTimeHeader />
       { messages.length > 0 &&
         // If messages exist, render all the messages
         messages.map((message)=> {
