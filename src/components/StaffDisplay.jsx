@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import { fetchData } from "../helpers/common";
 
 const StaffDisplay = () => {
-  const [allStaff, setAllStaff] = useState([]);
   const [staff, setStaff] = useState([]);
   const [allPatients, setAllPatients] = useState([]);
   const [patient, setPatient] = useState([]);
+  const [staffWards, setStaffWards] = useState();
+  const [showWards, setShowWards] = useState(true);
+  const [showBeds, setShowBeds] = useState(false);
+  const [selectedWard, setSelectedWard] = useState();
 
-  // This GET all staff works
-  const getAllStaff = async () => {
-    const { ok, data } = await fetchData("/api/staff");
-    console.log("AllStaff:");
-    console.log(data);
+  // GET a staff by his NRIC Number
+  const getStaffByNric = async () => {
+    const { ok, data } = await fetchData("/api/staff/nric", "POST", {
+      staff_nric: "t3132589i",
+    });
+
     if (ok) {
-      setAllStaff(data);
+      setStaff(data);
+      setStaffWards(data.staff_ward);
     } else {
       console.log(data);
     }
@@ -31,40 +36,27 @@ const StaffDisplay = () => {
     }
   };
 
-  // GET a staff by his NRIC Number
-  const getStaffByNric = async () => {
-    const { ok, data } = await fetchData("/api/staff/nric", "POST", {
-      staff_nric: "t1778359x",
-    });
-    console.log("One Staff:");
-    console.log(data.staff_firstName, data.staff_lastName, data.staff_ward[0]);
+  const handleWardClick = (event) => {
+    setShowWards(false);
+    setShowBeds(true);
+    setSelectedWard(event.target.value);
+    console.log(selectedWard);
+    console.log("show wards", showWards);
+    console.log("show beds", showBeds);
 
-    if (ok) {
-      setStaff(data);
-    } else {
-      console.log(data);
-    }
-  };
-
-  // GET a patient by his NRIC Number
-  const getPatientByNric = async () => {
-    const { ok, data } = await fetchData("/api/patients/nric", "POST", {
-      patient_nric: "t1778359x",
-    });
-
-    if (ok) {
-      setPatient(data);
-    } else {
-      console.log(data);
-    }
+    setShowBeds(true);
   };
 
   useEffect(() => {
     getAllPatients();
-    getAllStaff();
-    getPatientByNric();
     getStaffByNric();
   }, []);
+
+  useEffect(() => {
+    showBeds;
+  }, [showWards]);
+
+  console.log("show wards", showWards);
 
   return (
     <>
@@ -74,22 +66,37 @@ const StaffDisplay = () => {
           <div>{staff.staff_gender}</div>
           <div>{staff.staff_firstName}</div>
           <div>{staff.staff_lastName}</div>
+          {showWards &&
+            staffWards?.map((item) => {
+              return (
+                <button
+                  className="ward"
+                  onClick={(event) => {
+                    handleWardClick(event);
+                  }}
+                >
+                  {item}
+                </button>
+              );
+            })}
         </div>
+        <div>
+          {showBeds &&
+            bedsInWard?.map((item) => {
+              return (
+                <button className="beds" onClick="">
+                  {item}
+                </button>
+              );
+            })}
+        </div>
+
         <br />
-        // to check if allStaff works
-        <div>All Staff</div>
-        {allStaff.map((item) => {
-          return <div>{item.staff_hospitalId}</div>;
-        })}
+        <div>Show Wards: {showWards}</div>
+        <div>Show Beds: {showBeds}</div>
       </div>
 
       <div className="row">
-        <div>One Patient: </div>
-        <div>
-          <div>{patient.patient_gender}</div>
-          <div>{patient.patient_firstName}</div>
-          <div>{patient.patient_lastName}</div>
-        </div>
         <br />
         // To check if allPatients works
         <div>// All Patients //</div>
