@@ -10,18 +10,19 @@ import SubHeader from "./components/SubHeader";
 
 function App() {
   // current user's unique ID in db
-  const [userID, setUserID] = useState('')
+  const [userID, setUserID] = useState('6454e24f9d39467f4d224a74')
 
   // staff or contact
   const [role, setRole] = useState('')
 
   // for staff - this will be set after Ward+Bed are selected
   // for contact - this will be set after login
-  const [patientNRIC, setPatientNRIC] = useState('')
+  const [patient, setPatient] = useState({ _id: '6454e1b39d39467f4d224a1a'})
+
 
   return (
     <>
-      <UserContext.Provider value={({userID, setUserID, role, setRole, patientNRIC, setPatientNRIC})}>
+      <UserContext.Provider value={({userID, setUserID, role, setRole, patient, setPatient})}>
       <div className="centered">
         <div style={{
           width: '420px',
@@ -31,9 +32,9 @@ function App() {
         }}>
           <Header />
           <SubHeader />
-          <HomePage />
-          {/* <FamilyPatient />
-          <ChatPage />  */}
+          {/* <HomePage /> */}
+          {/* <FamilyPatient /> */}
+          <ChatPage /> 
 
         </div>
       </div>

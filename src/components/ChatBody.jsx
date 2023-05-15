@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './ChatBody.module.css'
 import ChatMessage from './ChatMessage'
+import UserContext from "../context/user"
 import { fetchData } from '../helpers/common'
 
 const ChatBody = () => {
+  const userCtx = useContext(UserContext)
   const [messages, setMessages] = useState([])
 
   const getMessages = async () => {
-    const { ok, data } = await fetchData('/api/chats')
+    const { ok, data } = await fetchData('/api/chats/id', "POST", {
+      chat_id: userCtx.patient._id
+    })
 
     if (ok) {
       setMessages(data)
@@ -17,14 +21,12 @@ const ChatBody = () => {
   }
 
   useEffect(()=> {
-    getMessages
+    getMessages()
   },[])
   
 
   return (
     <div className={styles['main-container']}>
-      <button onClick={getMessages}>a</button>
-      <button onClick={()=> console.log(messages)}>b</button>
       { messages.length > 0 &&
         // If messages exist, render all the messages
         messages.map((message)=> {

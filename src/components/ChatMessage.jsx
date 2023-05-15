@@ -1,39 +1,31 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./ChatMessage.module.css";
 import UserContext from "../context/user"
-import { BorderColor } from "@mui/icons-material";
+import { fetchData } from "../helpers/common";
 
 const ChatMessage = (props) => {
   const [senderName, setSenderName] = useState('')
+  const [read, setRead] = useState()
   const userDetails = useContext(UserContext)
   const messageDetails = props.message
-  
-  const getSenderName = async() => {
-    // only get the Sender Name from the database if the sender of the message is not the user
-    if (messageDetails.msg_senderId != userDetails.userID) {
 
-      // search staff db for name if message is from staff
-      if (messageDetails.msg_fromNurse) {
-        const { ok, data } = await fetchData('/api/staff/' + messageDetails.msg_senderId, "POST")
 
-        if (ok) {
-          setSenderName(data.staff_firstName + ' ' + data.staff_lastName)
-        } else {
-          console.log('damn error here', data)
-        }
+  const readMessage = async() => {
+    const { ok, data } = await fetchData('/api/chats/' + messageDetails._id, "PATCH", {
+      msg_isRead: true
+    })
 
-      // search contacts db for name if message is from family
-      } else {
-        const { ok, data } = await fetchData('/api/contacts/' + messageDetails.msg_senderId, "POST")
-
-        if (ok) {
-          setSenderName(data.contact_firstName + ' ' + data.staff_lastName)
-        } else {
-          console.log('damn error here instead', data)
-        }
-      }
+    if (ok) {
+      setRead(true)
+    } else {
+      console.log('failed read')
     }
   }
+
+  function formatAMPM(date) {
+    return date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+  }
+
 
   var messageBoxStyling = {}
   
@@ -51,6 +43,11 @@ const ChatMessage = (props) => {
     messageBoxStyling['backgroundColor'] = '#FEE2E4'
   }
 
+  useEffect(()=> {
+    setRead(messageDetails.msg_isRead)
+  }, [])
+
+
   return (
     <div className={styles["main-container"]}>
       
@@ -62,11 +59,14 @@ const ChatMessage = (props) => {
               type="checkbox"
               value="read" 
               // it will be checked if isRead is true
-              checked={messageDetails.msg_isRead}
+              checked={read}
               // if isRead is true, the input will also be disabled
-              disabled={props.isRead}
+              disabled={read}
+              
+              onChange={readMessage}
+              style={{ paddingRight: '0.25rem' }}
             />
-            {props.timeSent}
+            {formatAMPM(new Date(messageDetails.msg_timeSent))}
           </div>
         </div>
 
