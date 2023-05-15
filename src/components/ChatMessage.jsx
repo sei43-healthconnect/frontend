@@ -64,7 +64,7 @@ const ChatMessage = (props) => {
               disabled={read}
               
               onChange={readMessage}
-            />{` `}
+            />{`   `}
             {formatAMPM(new Date(messageDetails.msg_timeSent))}
           </div>
         </div>

@@ -2,6 +2,7 @@
   width: 100%;
   height: fit-content;
   padding: 0px 40px;
+  transform: translateZ(0)
 }
 
 .message-details {
