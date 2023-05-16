@@ -84,6 +84,9 @@ const ChatInput = (props) => {
           <img src={SendIcon} />
         </IconButton>
       </Stack>
+      { userCtx.role == 'contact' && (
+        <p className={ styles['text-disclaimer'] }>We kindly request for your understanding that our staff may not be able to respond to your message immediately. Rest assured that we will respond as soon as we can. Thank you for your patience and support.</p>
+      )}
     </div>
   );
 };
