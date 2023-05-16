@@ -13,7 +13,7 @@ body {
 .centered {
   width: 420px;
   height: 100vh;
-  overflow: scroll;
+  /* overflow: scroll; */
   margin: 0 auto;
   text-align: center;
   display: flex;

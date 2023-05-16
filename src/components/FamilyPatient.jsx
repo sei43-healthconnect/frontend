@@ -8,39 +8,10 @@ import UserContext from "../context/user";
 
 const FamilyPatient = () => {
   const userCtx = useContext(UserContext);
-  const [selectedPatient, setSelectedPatient] = useState("");
-  const [staffs, setStaffs] = useState([]);
+  // const [selectedPatient, setSelectedPatient] = useState("");
+  // const [staffs, setStaffs] = useState([]);
   const [showVerificationModal, setShowVerificationModal] = useState(false);
-
-  const getSelectedPatient = async () => {
-    // get patient nric from context
-    // use patient nric as part of my GET request parameters
-    // userCtx.patient_nric;
-
-    const { ok, data } = await fetchData("/api/patients/nric", "POST", {
-      patient_nric: "s0000001x",
-    });
-
-    if (ok) {
-      setSelectedPatient(data);
-    } else {
-      console.log(data);
-    }
-  };
-  const getStaffs = async () => {
-    const { ok, data } = await fetchData("/api/staff");
-
-    if (ok) {
-      setStaffs(data);
-    } else {
-      console.log(data);
-    }
-  };
-
-  useEffect(() => {
-    getSelectedPatient();
-    getStaffs();
-  }, []);
+  const [authorised, setAuthorised] = useState(false);
 
   const handleModal = (event) => {
     setShowVerificationModal(true);
@@ -50,24 +21,15 @@ const FamilyPatient = () => {
     setShowVerificationModal(false);
   };
 
-  const handleConfirmPatient = (event) => {
-    if (event.target.value == selectedPatient.patient_nric) {
-      setShowVerificationModal(false);
-    }
-  };
-
   return (
     <>
-      {showVerificationModal && (
+      {showVerificationModal && !authorised && (
         <VerificationModal
-          ic={selectedPatient.patient_nric}
           setShowVerificationModal={setShowVerificationModal}
-          confirmNRIC={confirmNRIC}
           handleCloseModal={handleCloseModal}
-          handleConfirmPatient={handleConfirmPatient}
+          setAuthorised={setAuthorised}
         />
       )}
-
       <div className={styles.FamilyPatient}>
         <div className={styles.MyCareDisplay}>
           <div className={styles.MyCare}>My Care</div>
@@ -76,17 +38,16 @@ const FamilyPatient = () => {
           <div className={styles.PatientDetails}>
             <Avatar
               alt="Patient1"
-              src={Patient1}
-              // src={selectedPatient.patient_photo}
+              src={userCtx.patient.patient_photo}
               sx={{ width: 96, height: 96 }}
             />
             <div className={styles.PatientDetailsBox}>
               <div className={styles.PatientNameBox}>
                 <div className={styles.PatientName}>Patient Name</div>
                 <div className={styles.PatientNameText}>
-                  {selectedPatient.patient_firstName}
-                  {selectedPatient.patient_lastName}
-                  Kah Poh Tian
+                  {userCtx.patient.patient_firstName}
+                  {userCtx.patient.patient_lastName}
+                  {/* Kah Poh Tian */}
                 </div>
               </div>
               <div className={styles.HospitalDetailsBox}>
@@ -95,9 +56,8 @@ const FamilyPatient = () => {
                   Ang Mo Kio Community Hospital
                 </div>
                 <div className={styles.WardNoBedNo}>
-                  {selectedPatient.patient_ward}
-                  Ward 46 /{selectedPatient.patient_bed}
-                  Bed 1
+                  Ward {userCtx.patient.patient_ward} / Bed {""}
+                  {userCtx.patient.patient_bed}
                 </div>
               </div>
               <div className={styles.StaffNameBox}>
@@ -123,7 +83,10 @@ const FamilyPatient = () => {
               {/* <div className={styles.badge}>
               <div className={styles.badge1}>10</div>
             </div> */}
-              <button className={styles.PatientDetailsTextBox}>
+              <button
+                className={styles.PatientDetailsTextBox}
+                onClick={handleModal}
+              >
                 <div className={styles.PatientDetailsText}>
                   Patient's Details
                 </div>

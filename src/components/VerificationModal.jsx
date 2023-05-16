@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useContext, useRef } from "react";
 import ReactDOM from "react-dom";
 import styles from "./VerificationModal.module.css";
 import CloseIcon from "@mui/icons-material/Close";
+import UserContext from "../context/user";
 
 const OverLay = (props) => {
+  const inputRef = useRef(null);
+  const userCtx = useContext(UserContext);
+
+  const handleConfirmPatient = (event) => {
+    if (inputRef.current.value === userCtx.patient.patient_nric) {
+      props.setShowVerificationModal(false);
+      props.setAuthorised(true);
+    }
+  };
+
   return (
     <div className={styles.backdrop}>
       <div className={styles.modalBox}>
@@ -30,6 +41,7 @@ const OverLay = (props) => {
               type="NRIC"
               className={styles.NRICInput}
               placeholder="e.g S1234567A"
+              ref={inputRef}
             ></input>
             <div className={styles.NRICYellowBox}>
               <div className={styles.NRICYellowBoxText}>NRIC</div>
@@ -39,7 +51,7 @@ const OverLay = (props) => {
         <div className={styles.fourthBox}>
           <button
             className={styles.confirmButton}
-            onClick={props.handleConfirmPatient}
+            onClick={handleConfirmPatient}
           >
             <div className={styles.confirmText}>Confirm</div>
           </button>
@@ -54,9 +66,9 @@ const VerificationModal = (props) => {
     <>
       {ReactDOM.createPortal(
         <OverLay
-          // patientNRIC={props.NRIC} confirmNRIC={props.confirmNRIC}
+          setShowVerificationModal={props.setShowVerificationModal}
           handleCloseModal={props.handleCloseModal}
-          handleConfirmPatient={props.handleConfirmPatient}
+          setAuthorised={props.setAuthorised}
         />,
         document.querySelector("#modal-root")
       )}

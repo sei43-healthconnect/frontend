@@ -62,8 +62,10 @@ function App() {
           setUserID,
           role,
           setRole,
-          patientNRIC,
-          setPatientNRIC,
+          patient,
+          setPatient,
+          patientNOK,
+          setPatientNOK,
         }}
       >
         <div className="centered">
@@ -77,9 +79,9 @@ function App() {
           >
             <Header />
             <SubHeader />
-            <HomePage />
-            {/* <FamilyPatient />
-          <ChatPage />  */}
+            {/* <HomePage /> */}
+            <FamilyPatient />
+            {/* <ChatPage /> */}
           </div>
         </div>
       </UserContext.Provider>
