@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import styles from './ChatBody.module.css'
 import ChatMessage from './ChatMessage'
 import UserContext from "../context/user"
@@ -7,6 +7,7 @@ import ChatDateHeader from './ChatDateHeader'
 
 const ChatBody = () => {
   const userCtx = useContext(UserContext)
+  const bottomRef = useRef('')
   const [messages, setMessages] = useState({})
 
   const getMessages = async () => {
@@ -27,6 +28,7 @@ const ChatBody = () => {
       }, Object.create(null));
 
       setMessages(partitioned)
+      bottomRef.current.scrollIntoView();
     } else {
       console.log(data)
     }
@@ -51,6 +53,7 @@ const ChatBody = () => {
           </>) 
         })     
       }
+      <div ref={bottomRef}></div>
     </div>
   )
 }

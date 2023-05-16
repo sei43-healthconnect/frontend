@@ -1,39 +1,35 @@
 import { Stack } from '@mui/system'
 import { Grid } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './ChatHeader.module.css'
+import UserContext from '../context/user'
+
 
 const ChatHeader = () => {
-  const [ward, setWard] = useState(46)
-  const [bed, setBed] = useState(1)
-  const [nurse, setNurse] = useState('Mabel See')
-  const [doctor, setDoctor] = useState('Dr Tan')
-  const [patient, setPatient] = useState('Kah Poh Tian')
-  const [nok, setNok] = useState('David Kah')
-  const [nokRship, setNokRship] = useState('Son')
+  const userCtx = useContext(UserContext)
 
   return (
     <>
       <Grid container spacing={0}>
         <Grid item xs={6}>
-          <div className={styles['ward-header']}>Ward {ward}</div>
+          <div className={styles['ward-header']}>Ward {userCtx.patient.patient_ward}</div>
         </Grid>
         <Grid item xs={6}>
-          <div className={styles['bed-header']}>Bed {bed}</div>
+          <div className={styles['bed-header']}>Bed {userCtx.patient.patient_bed}</div>
         </Grid>
         <Grid item xs={6}>
           <div className={styles['ward-details']}>
             <Stack spacing={1.5}>
-              <div>Staff Nurse <br /> <span className={styles['name']}>{nurse}</span></div>
-              <div>Physiotherapist<br /> <span className={styles['name']}>{doctor}</span></div>
+              <div>Staff Nurse <br /> <span className={styles['name']}>Mabel See</span></div>
+              <div>Physiotherapist<br /> <span className={styles['name']}>Dr Tan</span></div>
             </Stack>
           </div>
         </Grid>
         <Grid item xs={6}>
           <div className={styles['bed-details']}>
             <Stack spacing={1.5}>
-              <div>Patient's Name <br /> <span className={styles['name']}>{patient}</span></div>
-              <div>Patient's NOK<br /> <span className={styles['name']}>{nok}</span> {`(${nokRship})`}</div>
+              <div>Patient's Name <br /> <span className={styles['name']}>{`${userCtx.patient.patient_firstName} ${userCtx.patient.patient_lastName}`}</span></div>
+              <div>Patient's NOK<br /> <span className={styles['name']}>{`${userCtx.patientNOK.contact_firstName} ${userCtx.patientNOK.contact_lastName}`}</span> {`(${userCtx.patientNOK.contact_relationship})`}</div>
             </Stack>
           </div>
         </Grid>
