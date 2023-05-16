@@ -1,8 +1,6 @@
 .main-container {
   width: 100%;
-  padding-top: 1.5rem;
-  max-height: 573.133px;
-  flex-grow: 1;
+  flex: 0 1 580px;
   background-color: #FFFFFF;
   overflow: scroll;
 }

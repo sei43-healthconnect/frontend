@@ -5,7 +5,7 @@ import UserContext from "../context/user"
 import styles from './ChatInput.module.css'
 import { fetchData } from '../helpers/common'
 
-const ChatInput = () => {
+const ChatInput = (props) => {
   const userCtx = useContext(UserContext)
   const [input, setInput] = useState('')
   
@@ -22,6 +22,7 @@ const ChatInput = () => {
 
     if (ok) {
       console.log('chat added')
+
       setInput('')
     } else {
       console.log('failed to send message')

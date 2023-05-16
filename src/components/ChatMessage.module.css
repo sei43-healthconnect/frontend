@@ -7,7 +7,7 @@
 
 .message-details {
   max-width: 75%;
-  width: auto;
+  width: fit-content;
   justify-content: right;
   margin-top: 0;
 }

@@ -12,8 +12,14 @@ const ChatPage = () => {
         flexDirection: 'column'
       }}>
         <ChatHeader /> 
-        <ChatBody /> 
-        <ChatInput />
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column-reverse',
+          height: 'calc(100vh - 264px)'
+        }}>
+          <ChatInput />
+          <ChatBody /> 
+        </div>
       </div> 
     </>
   )
