@@ -1,27 +1,9 @@
-.head {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0px;
-  gap: 4px;
-
-  position: absolute;
-  width: 411px;
-  height: 296.13px;
-  left: calc(50% - 411px / 2);
-  top: 146px;
+.main-container {
+  width: 100%;
+  height: 100vh;
+  padding: 0 24px;
 }
 
-.MiddleLogo {
-  width: 150px;
-  height: 150px;
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-}
 .h1 {
   width: 409px;
   height: 52px;
