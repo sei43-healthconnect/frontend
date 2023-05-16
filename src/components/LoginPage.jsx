@@ -47,7 +47,7 @@ const StaffLogin = () => {
         <img src={HomeLogo} />
       </div>
 
-      <div style={{ width: '100%', height: '100vh', padding: '0 24px'}}>
+      <div style={{ width: '100%', height: '100vh', padding: '0 24px', margin: '38px 0px'}}>
       {!role && (
         <Stack spacing={5}>
           <Button sx={buttonStyling} variant="contained" size="large" onClick={()=> setRole('staff')}>Staff Login</Button>
@@ -57,38 +57,39 @@ const StaffLogin = () => {
 
       {role && (
         <Stack spacing={5}>
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="user">{role=='staff' ? 'Staff ID': 'Mobile No.' }</InputLabel>
-            <OutlinedInput 
-            id="user" 
-            type="text"
-            value={user}
-            onChange={(e)=> setUser(e.target.value)}
-            endAdornment={
-              <InputAdornment position="end">
-                <HighlightOffIcon style={{cursor:'pointer'}} onClick={()=> setUser('')} />
-              </InputAdornment>
-            } 
-            label={role=='staff' ? 'Staff ID': 'Mobile No.' }
-            />
-          </FormControl>
+          <Stack spacing={2}>
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="user">{role=='staff' ? 'Staff ID': 'Mobile No.' }</InputLabel>
+              <OutlinedInput 
+              id="user" 
+              type="text"
+              value={user}
+              onChange={(e)=> setUser(e.target.value)}
+              endAdornment={
+                <InputAdornment position="end">
+                  <HighlightOffIcon style={{cursor:'pointer'}} onClick={()=> setUser('')} />
+                </InputAdornment>
+              } 
+              label={role=='staff' ? 'Staff ID': 'Mobile No.' }
+              />
+            </FormControl>
 
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <OutlinedInput 
-            id="password" 
-            type="password"
-            value={password}
-            onChange={(e)=> setPassword(e.target.value)}
-            endAdornment={
-              <InputAdornment position="end">
-                <HighlightOffIcon style={{cursor:'pointer'}} onClick={()=> setPassword('')} />
-              </InputAdornment>
-            } 
-            label="Password" 
-            />
-          </FormControl>
-
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <OutlinedInput 
+              id="password" 
+              type="password"
+              value={password}
+              onChange={(e)=> setPassword(e.target.value)}
+              endAdornment={
+                <InputAdornment position="end">
+                  <HighlightOffIcon style={{cursor:'pointer'}} onClick={()=> setPassword('')} />
+                </InputAdornment>
+              } 
+              label="Password" 
+              />
+            </FormControl>
+          </Stack>
           <Button sx={buttonStyling} disabled={!(user && password)} variant="contained" size="large" onClick={handleLogin}>Login</Button>
         </Stack>
       )
