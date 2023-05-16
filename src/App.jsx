@@ -10,19 +10,21 @@ import SubHeader from "./components/SubHeader";
 
 function App() {
   // current user's unique ID in db
-  const [userID, setUserID] = useState('6454e24f9d39467f4d224a74')
+  const [userID, setUserID] = useState('') // this is a string of the user's _id in the db
 
-  // staff or contact
-  const [role, setRole] = useState('staff')
+  // set on login
+  const [role, setRole] = useState('') // 'staff' or 'contact'
 
-  // for staff - this will be set after Ward+Bed are selected
-  // for contact - this will be set after login
-  const [patient, setPatient] = useState({ _id: '6454e1b39d39467f4d224a1a'})
+  // for staff - these will be set after Ward+Bed are selected
+  // for contact - these will be set after login
+  const [patient, setPatient] = useState({}) // contains full data object of selected patient
+  const [patientNOK, setPatientNOK] = useState({}) // contains full data object of selected patient's NOK 
+
 
 
   return (
     <>
-      <UserContext.Provider value={({userID, setUserID, role, setRole, patient, setPatient})}>
+      <UserContext.Provider value={({userID, setUserID, role, setRole, patient, setPatient, patientNOK, setPatientNOK})}>
       <div className="centered">
         <div style={{
           width: '420px',

@@ -1,5 +1,5 @@
 import { Button, Container, IconButton, Stack, TextField } from "@mui/material";
-import SendRoundedIcon from '@mui/icons-material/SendRounded';
+import SendIcon from './Images/send.png';
 import React, { useContext, useState } from "react";
 import UserContext from "../context/user"
 import styles from './ChatInput.module.css'
@@ -81,7 +81,7 @@ const ChatInput = (props) => {
           onChange={(e)=> setInput(e.target.value)}
         />
         <IconButton size="small" sx={{ flexGrow: 0 }} onClick={putChat}  > 
-          <SendRoundedIcon fontSize="inherit" />
+          <img src={SendIcon} />
         </IconButton>
       </Stack>
     </div>
