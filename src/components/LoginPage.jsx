@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
 import { fetchData } from "../helpers/common";
 import UserContext from "../context/user";
-import styles from "./Login.module.css";
 import HomeLogo from "./Images/HomeLogoFrame.png";
 import { Button, FormControl, Input, InputAdornment, InputLabel, OutlinedInput, Stack } from "@mui/material";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-const StaffLogin = (props) => {
+const StaffLogin = () => {
   const userCtx = useContext(UserContext);
   const [role, setRole] = useState('') // set thru the choosing of button
   const [user, setUser] = useState('');
@@ -14,14 +13,23 @@ const StaffLogin = (props) => {
 
   const handleLogin = async () => {
     const { ok, data } = await fetchData("/auth/login", "POST", {
-      id,
-      password,
+      role: role,
+      user: user,
+      password: password,
     });
+
     if (ok) {
-      handleLogin(data);
+      userCtx.setUserID(data._id)
+      userCtx.setRole(role)
+      if (role == 'contact') {
+        userCtx.setPatientNOK(data)
+      }
     } else {
       console.log(data);
     }
+    setRole('')
+    setUser('')
+    setPassword('')
   };
 
   const buttonStyling = {
@@ -39,7 +47,7 @@ const StaffLogin = (props) => {
         <img src={HomeLogo} />
       </div>
 
-      <div className={ styles["main-container"] }>
+      <div style={{ width: '100%', height: '100vh', padding: '0 24px'}}>
       {!role && (
         <Stack spacing={5}>
           <Button sx={buttonStyling} variant="contained" size="large" onClick={()=> setRole('staff')}>Staff Login</Button>
@@ -81,8 +89,7 @@ const StaffLogin = (props) => {
             />
           </FormControl>
 
-        <Button sx={buttonStyling} disabled={!(user && password)} variant="contained" size="large" onClick={()=> console.log('login')}>Login</Button>
-
+          <Button sx={buttonStyling} disabled={!(user && password)} variant="contained" size="large" onClick={handleLogin}>Login</Button>
         </Stack>
       )
       

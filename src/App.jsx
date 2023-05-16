@@ -6,7 +6,7 @@ import HomePage from "./components/HomePage";
 import FamilyPatient from "./components/FamilyPatient";
 import Header from "./components/Header";
 import SubHeader from "./components/SubHeader";
-import StaffLogin from "./components/StaffLogin";
+import Login from "./components/LoginPage";
 
 function App() {
   // current user's unique ID in db
@@ -17,7 +17,8 @@ function App() {
 
   // for staff - this will be set after Ward+Bed are selected
   // for contact - this will be set after login
-  const [patientNRIC, setPatientNRIC] = useState("");
+  const [patient, setPatient] = useState("");
+  const [patientNOK, setPatientNOK] = useState("");
 
   return (
     <>
@@ -27,8 +28,10 @@ function App() {
           setUserID,
           role,
           setRole,
-          patientNRIC,
-          setPatientNRIC,
+          patient,
+          setPatient,
+          patientNOK,
+          setPatientNOK
         }}
       >
         <div className="centered">
@@ -40,7 +43,7 @@ function App() {
               flexFlow: "column",
             }}
           >
-            <StaffLogin />
+            <Login />
             {/* <Header />
           <SubHeader />
           <HomePage /> */}
