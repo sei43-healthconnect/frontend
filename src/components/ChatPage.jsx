@@ -55,7 +55,7 @@ const ChatPage = () => {
           flexDirection: 'column-reverse',
           height: 'calc(100vh - 264px)'
         }}>
-          <ChatInput getMessages={getMessages} />
+          <ChatInput getMessages={getMessages} isRead={isRead} />
           <ChatBody messages={messages} setIsRead={setIsRead} /> 
         </div>
       </div> 

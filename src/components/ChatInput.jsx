@@ -8,7 +8,6 @@ import { fetchData } from '../helpers/common'
 const ChatInput = (props) => {
   const userCtx = useContext(UserContext)
   const [input, setInput] = useState('')
-  
 
   const putChat = async() => {
     const { ok, data } = await fetchData('/api/chats/', "PUT", {
@@ -26,6 +25,14 @@ const ChatInput = (props) => {
       setInput('')
     } else {
       console.log('failed to send message')
+    }
+  }
+
+  const handleSend = () => {
+    if (props.isRead) {
+      putChat()
+    } else {
+      console.log('confirm read first')
     }
   }
 
@@ -72,7 +79,7 @@ const ChatInput = (props) => {
           value={input}
           onChange={(e)=> setInput(e.target.value)}
         />
-        <IconButton size="small" sx={{ flexGrow: 0 }} onClick={putChat}  > 
+        <IconButton size="small" sx={{ flexGrow: 0 }} onClick={handleSend}  > 
           <img src={SendIcon} />
         </IconButton>
       </Stack>
