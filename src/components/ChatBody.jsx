@@ -19,7 +19,7 @@ const ChatBody = (props) => {
           <>
             <ChatDateHeader date={dateKey} key={`dateHeader${idx}`}/>
             {messages[dateKey].map((message) => {
-              return (<ChatMessage id={message._id} key={message._id} message={message}/>)
+              return (<ChatMessage id={message._id} key={message._id} message={message} setIsRead={props.setIsRead} />)
             })}     
           </>) 
         })     

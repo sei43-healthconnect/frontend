@@ -20,6 +20,10 @@ const ChatPage = () => {
       var response = data
       response.map((message)=> {
         message.Date = new Date(message.msg_timeSent).toLocaleDateString('en-us', { year: 'numeric', month: 'short', day: 'numeric' })
+        // if message unread and opposite role is the sender
+        if (!message.msg_isRead && ((userCtx.role == 'staff' && !message.msg_fromNurse) || (userCtx.role == 'contact' && message.msg_fromNurse))) {
+          setIsRead(false)
+        }
       })
       
       var partitioned = response.reduce(function (r, a) {
@@ -52,7 +56,7 @@ const ChatPage = () => {
           height: 'calc(100vh - 264px)'
         }}>
           <ChatInput getMessages={getMessages} />
-          <ChatBody messages={messages} /> 
+          <ChatBody messages={messages} setIsRead={setIsRead} /> 
         </div>
       </div> 
     </>

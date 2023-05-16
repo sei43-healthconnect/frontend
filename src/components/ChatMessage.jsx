@@ -9,7 +9,6 @@ const ChatMessage = (props) => {
   const userDetails = useContext(UserContext)
   const messageDetails = props.message
 
-
   const readMessage = async() => {
     const { ok, data } = await fetchData('/api/chats/' + messageDetails._id, "PATCH", {
       msg_isRead: true
@@ -17,9 +16,16 @@ const ChatMessage = (props) => {
 
     if (ok) {
       setRead(true)
+      props.setIsRead(true)
       console.log('set read')
     } else {
       console.log('failed to set read')
+    }
+  }
+
+  const handleClick = () => {
+    if (!(messageDetails.msg_senderId == userDetails.userID)) {
+      readMessage()
     }
   }
 
@@ -64,7 +70,7 @@ const ChatMessage = (props) => {
               // if isRead is true, the input will also be disabled
               disabled={read}
               
-              onChange={readMessage}
+              onChange={handleClick}
             />{`   `}
             {formatAMPM(new Date(messageDetails.msg_timeSent))}
           </div>
