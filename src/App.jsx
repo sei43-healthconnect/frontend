@@ -30,9 +30,19 @@ function App() {
           display: 'flex',
           flexFlow: 'column'
         }}>
-          <Header />
-          <SubHeader />
-          <HomePage />
+          { !role && (
+            <Login />
+          )
+          }
+
+          { role && (
+            <>
+              <Header />
+              <SubHeader />          
+              <HomePage />
+            </>
+          )}
+
           {/* <FamilyPatient />
           <ChatPage />  */}
 
