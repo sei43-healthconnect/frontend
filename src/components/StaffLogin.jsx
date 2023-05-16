@@ -55,13 +55,14 @@ const StaffLogin = (props) => {
             id="user" 
             type="text"
             value={user}
+            onChange={(e)=> setUser(e.target.value)}
             endAdornment={
               <InputAdornment position="end">
                 <HighlightOffIcon style={{cursor:'pointer'}} onClick={()=> setUser('')} />
               </InputAdornment>
             } 
             label={role=='staff' ? 'Staff ID': 'Mobile No.' }
-            onChange={(e)=> setUser(e.value)}/>
+            />
           </FormControl>
 
           <FormControl variant="outlined">
@@ -70,16 +71,17 @@ const StaffLogin = (props) => {
             id="password" 
             type="password"
             value={password}
+            onChange={(e)=> setPassword(e.target.value)}
             endAdornment={
               <InputAdornment position="end">
                 <HighlightOffIcon style={{cursor:'pointer'}} onClick={()=> setPassword('')} />
               </InputAdornment>
             } 
             label="Password" 
-            onChange={(e)=> setPassword(e.value)}/>
+            />
           </FormControl>
 
-        <Button sx={buttonStyling} variant="contained" size="large" onClick={()=> console.log('login')}>Login</Button>
+        <Button sx={buttonStyling} disabled={!(user && password)} variant="contained" size="large" onClick={()=> console.log('login')}>Login</Button>
 
         </Stack>
       )
