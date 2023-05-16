@@ -1,0 +1,156 @@
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 4px;
+
+  position: absolute;
+  width: 411px;
+  height: 296.13px;
+  left: calc(50% - 411px / 2);
+  top: 146px;
+}
+
+.MiddleLogo {
+  width: 150px;
+  height: 150px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+.h1 {
+  width: 409px;
+  height: 52px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 45px;
+  line-height: 52px;
+  /* identical to box height, or 116% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  /* M3/sys/light/primary */
+
+  color: teal;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+.para {
+  width: 411px;
+  height: 24px;
+
+  /* M3/title/medium */
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  /* M3/ref/neutral/neutral50 */
+
+  color: #79767d;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px 24px;
+  gap: 24px;
+
+  position: absolute;
+  height: 136px;
+  left: 0%;
+  right: 0%;
+  top: 508px;
+}
+
+.input1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  width: 363px;
+  height: 56px;
+
+  border-radius: 4px 4px 0px 0px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.input2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  width: 363px;
+  height: 56px;
+
+  border-radius: 4px 4px 0px 0px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.forget {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 4px 16px 0px;
+  gap: 10px;
+
+  width: 363px;
+  height: 24px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center;
+  padding: 0px 24px;
+  gap: 4px;
+
+  position: absolute;
+  height: 56px;
+  width: 363px;
+  top: 455px;
+}
