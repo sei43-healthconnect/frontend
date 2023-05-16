@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import styles from "./StaffDetails.module.css";
 import { Avatar, Button } from "@mui/material";
 import Nurse1 from "./Images/Nurse1.jpg";
+import WardsNos from "./WardsNos";
 
 const StaffDetails = () => {
   const [staffID, setStaffID] = useState("838017B");
   const [staffName, setStaffName] = useState("Mabel See");
   const [wards, setWards] = useState("");
+
   return (
     <>
       <div className={styles.StaffDisplay}>
@@ -27,15 +29,9 @@ const StaffDetails = () => {
       </div>
       <div className={styles.WardsBox}>
         <div className={styles.WardsFrame}>
-          <button className={styles.WardsButton}>
-            <div className={styles.WardNo}>46</div>
-          </button>
-          <button className={styles.WardsButton}>
-            <div className={styles.WardNo}>47</div>
-          </button>
-          <button className={styles.WardsButton}>
-            <div className={styles.WardNo}>48</div>
-          </button>
+          <WardsNos />
+          <WardsNos />
+          <WardsNos />
         </div>
         <button className={styles.AddButton}>
           <div className={styles.layer}>

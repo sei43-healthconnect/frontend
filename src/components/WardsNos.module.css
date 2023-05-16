@@ -1,0 +1,55 @@
+.WardsButton {
+  /* Ward No. */
+
+  box-sizing: border-box;
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  gap: 4px;
+
+  width: 110.33px;
+  height: 76px;
+
+  /* M3/ref/primary/primary90 */
+
+  background: #ccdfe5;
+  /* M3/ref/primary/primary50 */
+
+  border: 1px solid #005e7d;
+  border-radius: 20px;
+}
+
+.WardNo {
+  /* 46 */
+
+  width: 51px;
+  height: 52px;
+
+  /* M3/display/medium */
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 45px;
+  line-height: 52px;
+  /* identical to box height, or 116% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  /* M3/sys/light/primary */
+
+  color: #004b64;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
