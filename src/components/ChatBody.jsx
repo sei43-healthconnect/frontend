@@ -1,44 +1,15 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styles from './ChatBody.module.css'
 import ChatMessage from './ChatMessage'
-import UserContext from "../context/user"
-import { fetchData } from '../helpers/common'
 import ChatDateHeader from './ChatDateHeader'
 
-const ChatBody = () => {
-  const userCtx = useContext(UserContext)
+const ChatBody = (props) => {
   const bottomRef = useRef('')
-  const [messages, setMessages] = useState({})
-
-  const getMessages = async () => {
-    const { ok, data } = await fetchData('/api/chats/id', "POST", {
-      chat_id: userCtx.patient._id
-    })
-
-    if (ok) {
-      var response = data
-      response.map((message)=> {
-        message.Date = new Date(message.msg_timeSent).toLocaleDateString('en-us', { year: 'numeric', month: 'short', day: 'numeric' })
-      })
-      
-      var partitioned = response.reduce(function (r, a) {
-        r[a.Date] = r[a.Date] || [];
-        r[a.Date].push(a);
-        return r;
-      }, Object.create(null));
-
-      setMessages(partitioned)
-      bottomRef.current.scrollIntoView();
-    } else {
-      console.log(data)
-    }
-  }
+  const messages = props.messages
 
   useEffect(()=> {
-    getMessages()
-  },[])
-  
-
+    bottomRef.current.scrollIntoView();
+  }, [props.messages])
   return (
     <div className={styles['main-container']}>
       { Object.keys(messages).length > 0 &&

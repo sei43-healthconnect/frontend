@@ -12,7 +12,7 @@ const ChatInput = (props) => {
 
   const putChat = async() => {
     const { ok, data } = await fetchData('/api/chats/', "PUT", {
-      chat_id: userCtx.patient,
+      chat_id: userCtx.patient._id['$oid'],
       msg_senderId: userCtx.userID,
       msg_fromNurse: userCtx.role == 'staff' ? true: false,
       msg_isRead: false,
@@ -22,18 +22,17 @@ const ChatInput = (props) => {
 
     if (ok) {
       console.log('chat added')
-
+      props.getMessages()
       setInput('')
     } else {
       console.log('failed to send message')
     }
   }
 
-
   return (
     <div className={ styles['main-container'] }>
       <Stack direction="row" spacing={1} >
-        {/* <Button
+        <Button
           variant="contained"
           sx={{
             width: 90,
@@ -50,7 +49,7 @@ const ChatInput = (props) => {
           }}
         >
           + Quick Text
-        </Button> */}
+        </Button>
         <TextField
           id="outlined-basic"
           placeholder="Type a message..."
@@ -70,13 +69,6 @@ const ChatInput = (props) => {
             flexGrow: 1,
             backgroundColor: "#FFFFFF"
           }}
-          // InputProps={{
-          //   style: {
-          //     font: "Roboto",
-          //     color: "#000000",
-          //     fontSize: "1rem",
-          //   },
-          // }}
           value={input}
           onChange={(e)=> setInput(e.target.value)}
         />
