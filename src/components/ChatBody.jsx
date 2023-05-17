@@ -16,12 +16,12 @@ const ChatBody = (props) => {
         // If messages exist, render all the messages
         Object.keys(messages).map((dateKey, idx)=> {
           return (
-          <>
-            <ChatDateHeader date={dateKey} key={`dateHeader${idx}`}/>
+          <React.Fragment key={dateKey}>
+            <ChatDateHeader date={dateKey} />
             {messages[dateKey].map((message) => {
               return (<ChatMessage id={message._id} key={message._id} message={message} setIsRead={props.setIsRead} />)
             })}     
-          </>) 
+          </React.Fragment>) 
         })     
       }
       <div ref={bottomRef}></div>

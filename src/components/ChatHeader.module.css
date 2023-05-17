@@ -17,8 +17,13 @@
   background-color: #FFECB3;
 }
 
+.tall-container {
+  height: 139px !important
+}
+
 .ward-details,
 .bed-details {
+  height: 100%;
   font-size: 0.875rem;
   padding: 0.5rem 1.5rem;
 }

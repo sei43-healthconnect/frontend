@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import UserContext from "./context/user";
-import ChatPage from "./components/ChatPage";
-import ChatInput from "./components/ChatInput";
-import FamilyPatient from "./components/FamilyPatient";
+import PageContext from "./context/page"
+
 import Header from "./components/Header";
 import SubHeader from "./components/SubHeader";
 import HomePage from "./components/HomePage";
@@ -21,46 +20,66 @@ function App() {
   const [patientNOK, setPatientNOK] = useState({});
   const [authorised, setAuthorised] = useState(false);
 
+
+  // 
+  const [showPatientDetails, setShowPatientDetails] = useState(false);
+  const [showChat, setShowChat] = useState(false);
+  const [showWards, setShowWards] = useState(true);
+  const [showBeds, setShowBeds] = useState(false);
+  const [showPatient, setShowPatient] = useState(false);
+
   return (
     <>
-      <UserContext.Provider
+      <PageContext.Provider
         value={{
-          authorised,
-          setAuthorised,
-          user,
-          setUser,
-          role,
-          setRole,
-          patient,
-          setPatient,
-          patientNOK,
-          setPatientNOK,
-        }}
-      >
-        <div className="centered">
-          <div
-            style={{
-              width: "420px",
-              height: "100vh",
-              display: "flex",
-              flexFlow: "column",
-            }}
-          >
-            {!role && <LoginPage />}
+          showPatientDetails,
+          setShowPatientDetails,
+          showChat,
+          setShowChat,
+          showWards,
+          setShowWards,
+          showBeds,
+          setShowBeds,
+          showPatient,
+          setShowPatient
+        }}>
+        <UserContext.Provider
+          value={{
+            authorised,
+            setAuthorised,
+            user,
+            setUser,
+            role,
+            setRole,
+            patient,
+            setPatient,
+            patientNOK,
+            setPatientNOK,
+          }}
+        >
+          <div className="centered">
+            <div
+              style={{
+                width: "420px",
+                height: "100vh",
+                display: "flex",
+                flexFlow: "column",
+              }}
+            >
+              {!role && <LoginPage />}
 
-            {role && (
-              <>
-                <Header />
-                <SubHeader />
-                <HomePage />
-              </>
-            )}
+              {role && (
+                <>
+                  <Header />
+                  <SubHeader />
+                  <HomePage />
+                </>
+              )}
 
-            {/* <FamilyPatient />
-          <ChatPage />  */}
+            </div>
           </div>
-        </div>
-      </UserContext.Provider>
+        </UserContext.Provider>
+      </PageContext.Provider>
     </>
   );
 }

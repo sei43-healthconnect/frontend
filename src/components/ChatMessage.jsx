@@ -6,17 +6,10 @@ import { fetchData } from "../helpers/common";
 const ChatMessage = (props) => {
   const userDetails = useContext(UserContext);
   const messageDetails = props.message;
-  const [read, setRead] = useState();
+  const [read, setRead] = useState(false);
   const [fromUser, setFromUser] = useState(
     messageDetails.msg_senderId._id == userDetails.user._id
   ); // compares the sender's id (of the message) with the user's id (from useContext)
-
-  // CHECK LOGS
-  console.log("usecxt", userDetails.user);
-  console.log("fetch", messageDetails.msg_senderId);
-  console.log(`check
-  fet ${messageDetails.msg_senderId._id}
-  ctx ${userDetails.user._id}`);
 
   const readMessage = async () => {
     const { ok, data } = await fetchData(

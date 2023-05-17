@@ -4,11 +4,14 @@ import { Avatar, Badge } from "@mui/material";
 import { fetchData } from "../helpers/common";
 import VerificationModal from "./VerificationModal";
 import UserContext from "../context/user";
+import PageContext from "../context/page";
 
 const FamilyPatient = (props) => {
   const userCtx = useContext(UserContext);
+  const pageCtx = useContext(PageContext);
   const [showVerificationModal, setShowVerificationModal] = useState(false);
-  const [authorised, setAuthorised] = useState(false);
+  const [action, setAction] = useState('')
+
 
   const getPatient = async () => {
     const { ok, data } = await fetchData("/api/patients/nric", "POST", {
@@ -23,36 +26,36 @@ const FamilyPatient = (props) => {
   };
 
   const handleModal = (event) => {
+    setAction('patientDetails')
     setShowVerificationModal(true);
     if (userCtx.authorised) {
-      props.setShowPatientDetails(true);
+      pageCtx.setShowPatientDetails(true);
     }
   };
 
   const handleChatModal = (event) => {
+    setAction('chat')
     setShowVerificationModal(true);
     if (userCtx.authorised) {
-      props.setShowChat(true);
+      pageCtx.setShowChat(true);
     }
   };
-
+  
   const handleCloseModal = (event) => {
     setShowVerificationModal(false);
   };
-
+  
   useEffect(() => {
     getPatient();
   }, []);
-
-  console.log(userCtx.patient);
+  
   return (
     <>
-      {showVerificationModal && !userCtx.authorised && (
+      {showVerificationModal && !userCtx.authorised && action && (
         <VerificationModal
           setShowVerificationModal={setShowVerificationModal}
+          action={action}
           handleCloseModal={handleCloseModal}
-          setAuthorised={setAuthorised}
-          setShowPatientDetails={props.setShowPatientDetails}
         />
       )}
       <div className={styles.FamilyPatient}>
@@ -95,17 +98,15 @@ const FamilyPatient = (props) => {
           </div>
           <div className={styles.ButtonBox}>
             <div className={styles.Button2Box}>
-              <Badge badgeContent={10} color="primary">
+              {/* <Badge badgeContent={10} color="primary"> */}
                 <button
                   className={styles.MessageStaffBox}
                   onClick={handleChatModal}
                 >
                   <div className={styles.MessageStaffText}>Message Staff</div>
                 </button>
-              </Badge>
-              {/* <div className={styles.badge}>
-              <div className={styles.badge1}>10</div>
-            </div> */}
+              {/* </Badge> */}
+
               <button
                 className={styles.PatientDetailsTextBox}
                 onClick={handleModal}

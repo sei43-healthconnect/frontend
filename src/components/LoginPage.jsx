@@ -52,7 +52,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#FFFFFF", margin: "0 auto" }}>
+    <div style={{ backgroundColor: "#FFFFFF", margin: "0 auto", height: "100vh" }}>
       <div style={{ margin: "38px 0px" }}>
         <img src={HomeLogo} />
       </div>
@@ -60,7 +60,6 @@ const LoginPage = () => {
       <div
         style={{
           width: "100%",
-          height: "100vh",
           padding: "0 24px",
           margin: "38px 0px",
         }}

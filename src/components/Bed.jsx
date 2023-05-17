@@ -2,12 +2,14 @@ import React, { useState, useContext } from "react";
 import { Grid } from "@mui/material";
 import styles from "./Bed.module.css";
 import { fetchData } from "../helpers/common";
-import UserContext from "../context/user";
 import PatientDetails from "./PatientDetails";
 import BedPatientHeader from "./BedPatientHeader";
+import UserContext from "../context/user";
+import PageContext from "../context/page";
 
 const Bed = (props) => {
   const userCtx = useContext(UserContext);
+  const pageCtx = useContext(PageContext)
   const [showPatientMenu, setShowPatientMenu] = useState(true);
   const [showPatientDetails, setShowPatientDetails] = useState(false);
 
@@ -30,7 +32,7 @@ const Bed = (props) => {
 
   const handleSendMsgClick = () => {
     getPatientNOK();
-    props.setShowChat(true);
+    pageCtx.setShowChat(true);
   };
 
   return (
