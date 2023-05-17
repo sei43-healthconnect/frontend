@@ -53,6 +53,8 @@ const ChatPage = () => {
     getMessages();
   }, []);
 
+  pageCtx.setCurrentPage("Chat Page")
+
   return (
     <>
       <div

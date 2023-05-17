@@ -6,9 +6,10 @@ import {
   Stack,
 } from "@mui/material";
 import React, { useState, useContext } from "react";
-import UserContext from "../context/user";
 import BedPatientHeader from "./BedPatientHeader";
 import { fetchData } from "../helpers/common";
+import UserContext from "../context/user";
+import PageContext from "../context/page";
 
 const PatientDetails = () => {
   // this date formatting formula need to be positionned above the state declaration because dateAdmitted and dateOfBirth make use of them...
@@ -31,6 +32,7 @@ const PatientDetails = () => {
   };
 
   const userCtx = useContext(UserContext);
+  const pageCtx = useContext(PageContext);
 
   const [dateOfBirth, setDateOfBirth] = useState(
     formatDate(userCtx.patient.patient_dateOfBirth)
@@ -91,6 +93,8 @@ const PatientDetails = () => {
   };
 
   const updatedPatient = {};
+
+  pageCtx.setCurrentPage("Patient Details")
 
   return (
     <div>
