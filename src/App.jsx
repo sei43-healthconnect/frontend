@@ -5,6 +5,7 @@ import ChatInput from "./components/ChatInput";
 import FamilyPatient from "./components/FamilyPatient";
 import Header from "./components/Header";
 import SubHeader from "./components/SubHeader";
+import HomePage from "./components/HomePage";
 
 function App() {
   // current user's unique ID in db
@@ -43,8 +44,8 @@ function App() {
           >
             <Header />
             <SubHeader />
-            {/* <HomePage /> */}
-            <FamilyPatient />
+            <HomePage />
+            {/* <FamilyPatient /> */}
             {/* <ChatPage /> */}
           </div>
         </div>
