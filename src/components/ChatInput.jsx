@@ -8,12 +8,12 @@ import { fetchData } from '../helpers/common'
 const ChatInput = (props) => {
   const userCtx = useContext(UserContext)
   const [input, setInput] = useState('')
-  
 
   const putChat = async() => {
     const { ok, data } = await fetchData('/api/chats/', "PUT", {
-      chat_id: userCtx.patient,
-      msg_senderId: userCtx.userID,
+      chat_id: userCtx.patient._id['$oid'],
+      msg_senderId: userCtx.user._id['$oid'],
+      role: userCtx.role == 'staff' ? 'Staff' : 'Contacts',
       msg_fromNurse: userCtx.role == 'staff' ? true: false,
       msg_isRead: false,
       msg_timeSent: new Date(),
@@ -22,13 +22,21 @@ const ChatInput = (props) => {
 
     if (ok) {
       console.log('chat added')
-
+      props.getMessages()
       setInput('')
     } else {
       console.log('failed to send message')
     }
   }
 
+  // only allows a message to be sent if all messages from the opposite role is read
+  const handleSend = () => {
+    if (props.isRead) {
+      putChat()
+    } else {
+      console.log('confirm read first')
+    }
+  }
 
   return (
     <div className={ styles['main-container'] }>
@@ -70,20 +78,16 @@ const ChatInput = (props) => {
             flexGrow: 1,
             backgroundColor: "#FFFFFF"
           }}
-          // InputProps={{
-          //   style: {
-          //     font: "Roboto",
-          //     color: "#000000",
-          //     fontSize: "1rem",
-          //   },
-          // }}
           value={input}
           onChange={(e)=> setInput(e.target.value)}
         />
-        <IconButton size="small" sx={{ flexGrow: 0 }} onClick={putChat}  > 
+        <IconButton size="small" sx={{ flexGrow: 0 }} onClick={handleSend}  > 
           <img src={SendIcon} />
         </IconButton>
       </Stack>
+      { userCtx.role == 'contact' && (
+        <p className={ styles['text-disclaimer'] }>We kindly request for your understanding that our staff may not be able to respond to your message immediately. Rest assured that we will respond as soon as we can. Thank you for your patience and support.</p>
+      )}
     </div>
   );
 };

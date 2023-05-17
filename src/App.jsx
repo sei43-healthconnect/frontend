@@ -17,8 +17,8 @@ function App() {
 
   // for staff - this will be set after Ward+Bed are selected
   // for contact - this will be set after login
-  const [patient, setPatient] = useState("");
-  const [patientNOK, setPatientNOK] = useState("");
+  const [patient, setPatient] = useState({});
+  const [patientNOK, setPatientNOK] = useState({});
 
   return (
     <>

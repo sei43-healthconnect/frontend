@@ -28,8 +28,8 @@ const ChatHeader = () => {
         <Grid item xs={6}>
           <div className={styles['bed-details']}>
             <Stack spacing={1.5}>
-              <div>Patient's Name <br /> <span className={styles['name']}>{`${userCtx.patient.patient_firstName} ${userCtx.patient.patient_lastName}`}</span></div>
-              <div>Patient's NOK<br /> <span className={styles['name']}>{`${userCtx.patientNOK.contact_firstName} ${userCtx.patientNOK.contact_lastName}`}</span> {`(${userCtx.patientNOK.contact_relationship})`}</div>
+              <div>Patient's Name <br /> <span className={styles['name']}>{`${userCtx.patient.firstName} ${userCtx.patient.lastName}`}</span></div>
+              <div>Patient's NOK<br /> <span className={styles['name']}>{`${userCtx.patientNOK.firstName} ${userCtx.patientNOK.lastName}`}</span> {`(${userCtx.patientNOK.contact_relationship})`}</div>
             </Stack>
           </div>
         </Grid>
