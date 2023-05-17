@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
+import UserContext from "../context/user";
 import { Avatar, Button } from "@mui/material";
 import { fetchData } from "../helpers/common";
 import StaffWards from "./StaffWards";
 import WardBeds from "./WardBeds";
 import Bed from "./Bed";
-import UserContext from "../context/user";
 
 const StaffDisplay = (props) => {
   const [showWards, setShowWards] = useState(true);
