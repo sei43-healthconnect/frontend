@@ -6,7 +6,7 @@ import VerificationModal from "./VerificationModal";
 import UserContext from "../context/user";
 import PageContext from "../context/page";
 
-const FamilyPatient = (props) => {
+const FamilyPatient = () => {
   const userCtx = useContext(UserContext);
   const pageCtx = useContext(PageContext);
   const [showVerificationModal, setShowVerificationModal] = useState(false);
@@ -65,7 +65,7 @@ const FamilyPatient = (props) => {
         <div className={styles.PatientDetailsDisplay}>
           <div className={styles.PatientDetails}>
             <Avatar
-              alt="Patient1"
+              alt={userCtx.patient.firstName}
               src={userCtx.patient.patient_photo}
               sx={{ width: 96, height: 96 }}
             />

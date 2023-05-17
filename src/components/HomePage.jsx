@@ -16,14 +16,10 @@ const HomePage = () => {
   return (
     <div className={styles.HomePage}>
       {userCtx.role == "staff" && !pageCtx.showChat && !pageCtx.showPatientDetails && (
-        <StaffDisplay
-          setShowPatientDetails={pageCtx.setShowPatientDetails}
-        />
+        <StaffDisplay />
       )}
       {userCtx.role == "contact" && !pageCtx.showChat && !pageCtx.showPatientDetails && (
-        <FamilyPatient
-          setShowPatientDetails={pageCtx.setShowPatientDetails}
-        />
+        <FamilyPatient />
       )}
       {userCtx.authorised && pageCtx.showPatientDetails && !pageCtx.showChat && (
         <PatientDetails />

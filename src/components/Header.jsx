@@ -11,11 +11,7 @@ const Header = () => {
   const pageCtx = useContext(PageContext)
 
   const goHome = () => {
-    pageCtx.setShowPatientDetails(false)
-    pageCtx.setShowChat(false)
-    pageCtx.setShowWards(true)
-    pageCtx.setShowBeds(false)
-    pageCtx.setShowPatient(false)
+    pageCtx.goToPage("Home Page")
   }
 
   return (

@@ -4,15 +4,18 @@ import { Avatar, Grid } from "@mui/material";
 import styles from "./WardBeds.module.css";
 import { fetchData } from "../helpers/common";
 import UserContext from "../context/user";
+import PageContext from "../context/page";
+
 
 const WardBeds = (props) => {
   const [patientsInWard, setPatientsInWard] = useState();
+  const pageCtx = useContext(PageContext)
 
   // GET all beds/patients in the ward
   const getPatientsInWard = async () => {
-    console.log("Ward selection : ", props.selectedWard);
+    console.log("Ward selection : ", pageCtx.selectedWard);
     const { ok, data } = await fetchData("/api/patients/ward", "POST", {
-      patient_ward: props.selectedWard,
+      patient_ward: pageCtx.selectedWard,
     });
 
     if (ok) {
@@ -27,11 +30,13 @@ const WardBeds = (props) => {
     getPatientsInWard();
   }, []);
 
+  pageCtx.setCurrentPage("Ward Page")
+  
   return (
     <>
       <div>
         <Grid item xs={12}>
-          <div className={styles["ward-header"]}>Ward {props.selectedWard}</div>
+          <div className={styles["ward-header"]}>Ward {pageCtx.selectedWard}</div>
         </Grid>
       </div>
 

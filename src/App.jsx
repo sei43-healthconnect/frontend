@@ -20,13 +20,38 @@ function App() {
   const [patientNOK, setPatientNOK] = useState({});
   const [authorised, setAuthorised] = useState(false);
 
-
-  // 
-  const [showPatientDetails, setShowPatientDetails] = useState(false);
-  const [showChat, setShowChat] = useState(false);
-  const [showWards, setShowWards] = useState(true);
+  // for conditional rendering of pages
   const [showBeds, setShowBeds] = useState(false);
+  const [showChat, setShowChat] = useState(false);
   const [showPatient, setShowPatient] = useState(false);
+  const [showPatientDetails, setShowPatientDetails] = useState(false);
+  const [showPatientMenu, setShowPatientMenu] = useState(true);
+  const [showWards, setShowWards] = useState(true);
+
+  const [selectedWard, setSelectedWard] = useState('')
+  const [selectedBed, setSelectedBed] = useState('')
+  
+  const [currentPage, setCurrentPage] = useState('')
+  
+  // states to render the pages 
+  const pages = {
+    "Home Page": [false, false, false, false, true, true, '', ''],
+    "Ward Page": [true, false, false, false, true, false, selectedWard, ''],
+    "Ward Bed Page": [false, false, true, false, true, false, selectedWard, selectedBed],
+    "Chat Page": [false, true, true, false, true, false, selectedWard, selectedBed],
+    "Patient Details": [false, false, true, true, false, false, selectedWard, selectedBed],  
+  }
+
+  const goToPage = (page) => {
+    setShowBeds(pages[page][0])
+    setShowChat(pages[page][1])
+    setShowPatient(pages[page][2])
+    setShowPatientDetails(pages[page][3])
+    setShowPatientMenu(pages[page][4])
+    setShowWards(pages[page][5])
+    setSelectedWard(pages[page][6])
+    setSelectedBed(pages[page][7])
+  }
 
   return (
     <>
@@ -41,7 +66,16 @@ function App() {
           showBeds,
           setShowBeds,
           showPatient,
-          setShowPatient
+          setShowPatient,
+          showPatientMenu, 
+          setShowPatientMenu,
+          selectedWard,
+          setSelectedWard,
+          selectedBed,
+          setSelectedBed,
+          currentPage,
+          setCurrentPage,
+          goToPage
         }}>
         <UserContext.Provider
           value={{

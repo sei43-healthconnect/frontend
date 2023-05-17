@@ -7,15 +7,13 @@ import BedPatientHeader from "./BedPatientHeader";
 import UserContext from "../context/user";
 import PageContext from "../context/page";
 
-const Bed = (props) => {
+const Bed = () => {
   const userCtx = useContext(UserContext);
   const pageCtx = useContext(PageContext)
-  const [showPatientMenu, setShowPatientMenu] = useState(true);
-  const [showPatientDetails, setShowPatientDetails] = useState(false);
 
   const handleClickPatientDetails = () => {
-    setShowPatientMenu(false);
-    setShowPatientDetails(true);
+    pageCtx.setShowPatientMenu(false);
+    pageCtx.setShowPatientDetails(true);
   };
 
   const getPatientNOK = async () => {
@@ -35,16 +33,13 @@ const Bed = (props) => {
     pageCtx.setShowChat(true);
   };
 
+  pageCtx.setCurrentPage("Ward Bed Page")
+
   return (
     <>
-      {showPatientMenu && (
+      {pageCtx.showPatientMenu && (
         <div>
-          <BedPatientHeader
-            setShowChat={props.setShowChat}
-            setShowPatientDetails={props.setShowPatientDetails}
-            selectedWard={props.selectedWard}
-            selectedBed={props.selectedBed}
-          />
+          <BedPatientHeader />
           <div className={styles.patientMenu}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -71,7 +66,7 @@ const Bed = (props) => {
         </div>
       )}
 
-      {showPatientDetails && <PatientDetails></PatientDetails>}
+      {pageCtx.showPatientDetails && <PatientDetails />}
     </>
   );
 };

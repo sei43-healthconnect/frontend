@@ -8,16 +8,7 @@ import Bed from "./Bed";
 import UserContext from "../context/user";
 import PageContext from "../context/page";
 
-const StaffDisplay = (props) => {
-  const [showWards, setShowWards] = useState(true);
-  const [showBeds, setShowBeds] = useState(false);
-  const [showPatient, setShowPatient] = useState(false);
-
-  const [selectedWard, setSelectedWard] = useState();
-  const [selectedBed, setSelectedBed] = useState();
-
-  const [allPatients, setAllPatients] = useState([]);
-
+const StaffDisplay = () => {
   const userCtx = useContext(UserContext);
   const pageCtx = useContext(PageContext);
 
@@ -33,18 +24,18 @@ const StaffDisplay = (props) => {
 
   // Once a ward is clicked, the number is stored in selectedWard, and the ward component is hidden
   const handleWardClick = (event) => {
-    setSelectedWard(event.target.textContent);
+    pageCtx.setSelectedWard(event.target.textContent);
     console.log("selected ward: ", event.target.textContent);
-    pageCtx.setShowWards((prevState) => !prevState);
-    pageCtx.setShowBeds((prevState) => !prevState);
+    pageCtx.setShowWards(false);
+    pageCtx.setShowBeds(true);
   };
 
   const handleBedClick = (bedNumber, item) => {
     userCtx.setPatient(item);
     console.log("event: ", bedNumber);
-    setSelectedBed(bedNumber);
-    pageCtx.setShowBeds((prevState) => !prevState);
-    pageCtx.setShowPatient((prevState) => !prevState);
+    pageCtx.setSelectedBed(bedNumber);
+    pageCtx.setShowBeds(false);
+    pageCtx.setShowPatient(true);
   };
 
   // useEffect(() => {
@@ -57,21 +48,19 @@ const StaffDisplay = (props) => {
         {pageCtx.showWards && (
           <StaffWards
             handleWardClick={handleWardClick}
-            setSelectedWard={setSelectedWard}
           ></StaffWards>
         )}
       </div>
       <div>
         {pageCtx.showBeds && (
           <WardBeds
-            selectedWard={selectedWard}
             handleBedClick={handleBedClick}
           ></WardBeds>
         )}
       </div>
       <div>
         {pageCtx.showPatient && (
-          <Bed selectedWard={selectedWard} selectedBed={selectedBed}></Bed>
+          <Bed />
         )}
       </div>
     </>
