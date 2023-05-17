@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { fetchData } from "../helpers/common";
 import UserContext from "../context/user";
 import HomeLogo from "./Images/HomeLogoFrame.png";
-import { Button, FormControl, Input, InputAdornment, InputLabel, OutlinedInput, Stack } from "@mui/material";
+import { Button, FormControl, InputAdornment, InputLabel, OutlinedInput, Stack } from "@mui/material";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 const StaffLogin = () => {
@@ -40,14 +40,15 @@ const StaffLogin = () => {
     textTransform: 'none'
   }
 
-
   return (
-    <div style={{ backgroundColor: '#FFFFFF' }}>
+    <div style={{ backgroundColor: '#FFFFFF', margin: "0 auto"}}>
       <div style={{ margin: '38px 0px'}}>
         <img src={HomeLogo} />
       </div>
 
-      <div style={{ width: '100%', height: '100vh', padding: '0 24px'}}>
+      <div style={{ width: '100%', height: '100vh', padding: '0 24px', margin: '38px 0px'}}>
+      
+      {/* if no role selected, show selection buttons */}
       {!role && (
         <Stack spacing={5}>
           <Button sx={buttonStyling} variant="contained" size="large" onClick={()=> setRole('staff')}>Staff Login</Button>
@@ -55,79 +56,48 @@ const StaffLogin = () => {
         </Stack>   
       )}
 
+      {/* once role is selected, show input boxes */}
       {role && (
         <Stack spacing={5}>
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="user">{role=='staff' ? 'Staff ID': 'Mobile No.' }</InputLabel>
-            <OutlinedInput 
-            id="user" 
-            type="text"
-            value={user}
-            onChange={(e)=> setUser(e.target.value)}
-            endAdornment={
-              <InputAdornment position="end">
-                <HighlightOffIcon style={{cursor:'pointer'}} onClick={()=> setUser('')} />
-              </InputAdornment>
-            } 
-            label={role=='staff' ? 'Staff ID': 'Mobile No.' }
-            />
-          </FormControl>
+          <Stack spacing={2}>
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="user">{ role =='staff' ? 'Staff ID': 'Mobile No.' }</InputLabel>
+              <OutlinedInput 
+              id="user" 
+              type="text"
+              value={user}
+              onChange={(e)=> setUser(e.target.value)}
+              endAdornment={
+                <InputAdornment position="end">
+                  <HighlightOffIcon style={{ cursor:'pointer' }} onClick={()=> setUser('')} />
+                </InputAdornment>
+              } 
+              label={ role == 'staff' ? 'Staff ID': 'Mobile No.' }
+              />
+            </FormControl>
 
-          <FormControl variant="outlined">
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <OutlinedInput 
-            id="password" 
-            type="password"
-            value={password}
-            onChange={(e)=> setPassword(e.target.value)}
-            endAdornment={
-              <InputAdornment position="end">
-                <HighlightOffIcon style={{cursor:'pointer'}} onClick={()=> setPassword('')} />
-              </InputAdornment>
-            } 
-            label="Password" 
-            />
-          </FormControl>
-
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <OutlinedInput 
+              id="password" 
+              type="password"
+              value={password}
+              onChange={(e)=> setPassword(e.target.value)}
+              endAdornment={
+                <InputAdornment position="end">
+                  <HighlightOffIcon style={{cursor:'pointer'}} onClick={()=> setPassword('')} />
+                </InputAdornment>
+              } 
+              label="Password" 
+              />
+            </FormControl>
+          </Stack>
           <Button sx={buttonStyling} disabled={!(user && password)} variant="contained" size="large" onClick={handleLogin}>Login</Button>
         </Stack>
-      )
-      
-      
-      
-      }
-
-
-
+      )}
 
       </div>  
     </div>
-
-      // <div className="inputs">
-      //   <input
-      //     type="text"
-      //     className={styles.input1}
-      //     value={id}
-      //     onChange={(e) => setId(e.target.value)}
-      //   />
-      //   <br></br>
-      //   <input
-      //     type="password"
-      //     className={styles.input2}
-      //     value={password}
-      //     onChange={(e) => setPassword(e.target.value)}
-      //   />
-      // </div>
-      // <div className="forget">
-      //   <p>
-      //     <u>Forget Password?</u>
-      //   </p>
-      // </div>
-      // <button className={styles.button} type="submit" onClick={handleLogin}>
-      //   Login
-      // </button>
-
-      // <br />
   );
 };
 
