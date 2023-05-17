@@ -3,18 +3,23 @@ import ReactDOM from "react-dom";
 import styles from "./VerificationModal.module.css";
 import CloseIcon from "@mui/icons-material/Close";
 import UserContext from "../context/user";
+import PageContext from "../context/page"
 
 const OverLay = (props) => {
   const inputRef = useRef(null);
   const userCtx = useContext(UserContext);
+  const pageCtx = useContext(PageContext)
 
   const handleConfirmPatient = (event) => {
     if (inputRef.current.value === userCtx.patient.patient_nric) {
       userCtx.setAuthorised(true);
-      props.setShowVerificationModal(false);
-    } else {
-      props.setShowPatientDetails(false);
+      if (props.action == 'patientDetails') {
+        pageCtx.setShowPatientDetails(true)
+      } else if (props.action == 'chat') {
+        pageCtx.setShowChat(true)
+      }
     }
+    props.setShowVerificationModal(false);
   };
 
   return (
@@ -70,7 +75,7 @@ const VerificationModal = (props) => {
         <OverLay
           setShowVerificationModal={props.setShowVerificationModal}
           handleCloseModal={props.handleCloseModal}
-          setAuthorised={props.setAuthorised}
+          action={props.action}
         />,
         document.querySelector("#modal-root")
       )}

@@ -6,6 +6,9 @@ import StaffWards from "./StaffWards";
 import WardBeds from "./WardBeds";
 import Bed from "./Bed";
 
+import UserContext from "../context/user";
+import PageContext from "../context/page";
+
 const StaffDisplay = (props) => {
   const [showWards, setShowWards] = useState(true);
   const [showBeds, setShowBeds] = useState(false);
@@ -17,6 +20,7 @@ const StaffDisplay = (props) => {
   const [allPatients, setAllPatients] = useState([]);
 
   const userCtx = useContext(UserContext);
+  const pageCtx = useContext(PageContext);
 
   // // GET all patients
   // const getAllPatients = async () => {
@@ -32,16 +36,16 @@ const StaffDisplay = (props) => {
   const handleWardClick = (event) => {
     setSelectedWard(event.target.textContent);
     console.log("selected ward: ", event.target.textContent);
-    setShowWards((prevState) => !prevState);
-    setShowBeds((prevState) => !prevState);
+    pageCtx.setShowWards((prevState) => !prevState);
+    pageCtx.setShowBeds((prevState) => !prevState);
   };
 
   const handleBedClick = (bedNumber, item) => {
     userCtx.setPatient(item);
     console.log("event: ", bedNumber);
     setSelectedBed(bedNumber);
-    setShowBeds((prevState) => !prevState);
-    setShowPatient((prevState) => !prevState);
+    pageCtx.setShowBeds((prevState) => !prevState);
+    pageCtx.setShowPatient((prevState) => !prevState);
   };
 
   // useEffect(() => {
@@ -51,7 +55,7 @@ const StaffDisplay = (props) => {
   return (
     <>
       <div>
-        {showWards && (
+        {pageCtx.showWards && (
           <StaffWards
             handleWardClick={handleWardClick}
             setSelectedWard={setSelectedWard}
@@ -59,7 +63,7 @@ const StaffDisplay = (props) => {
         )}
       </div>
       <div>
-        {showBeds && (
+        {pageCtx.showBeds && (
           <WardBeds
             selectedWard={selectedWard}
             handleBedClick={handleBedClick}
@@ -67,13 +71,8 @@ const StaffDisplay = (props) => {
         )}
       </div>
       <div>
-        {showPatient && (
-          <Bed
-            setShowChat={props.setShowChat}
-            setShowPatientDetails={props.setShowPatientDetails}
-            selectedWard={selectedWard}
-            selectedBed={selectedBed}
-          ></Bed>
+        {pageCtx.showPatient && (
+          <Bed selectedWard={selectedWard} selectedBed={selectedBed}></Bed>
         )}
       </div>
     </>

@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { fetchData } from "../helpers/common";
-import UserContext from "../context/user";
 import ChatHeader from "./ChatHeader";
 import ChatInput from "./ChatInput";
 import ChatBody from "./ChatBody";
 import { Button } from "@mui/material";
+import UserContext from "../context/user";
+import PageContext from "../context/page";
 
 const ChatPage = () => {
   const [messages, setMessages] = useState({});
   const [isRead, setIsRead] = useState(true); // checks that all 'applicable' chats are read - if false, this will disable sending of new messages
   const userCtx = useContext(UserContext);
+  const pageCtx = useContext(PageContext);
 
   const getMessages = async () => {
     const { ok, data } = await fetchData("/api/chats/id", "POST", {
@@ -65,7 +67,7 @@ const ChatPage = () => {
           style={{
             display: "flex",
             flexDirection: "column-reverse",
-            height: "calc(100vh - 264px)",
+            height: "calc(100vh - 283px)",
           }}
         >
           <ChatInput getMessages={getMessages} isRead={isRead} />

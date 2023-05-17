@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Header.module.css";
 import Hamburger from "./Images/Hamburger.png";
 import MiddleLogo from "./Images/MiddleLogo.png";
 import Bell from "./Images/Bell.png";
 
+import PageContext from "../context/page"
+
+
 const Header = () => {
-  const handleClick = (event) => {
-    console.log("Menu clicked");
-  };
+  const pageCtx = useContext(PageContext)
+
+  const goHome = () => {
+    pageCtx.setShowPatientDetails(false)
+    pageCtx.setShowChat(false)
+    pageCtx.setShowWards(true)
+    pageCtx.setShowBeds(false)
+    pageCtx.setShowPatient(false)
+  }
+
   return (
     <div className={styles.header}>
       <div className={styles.menu}>
@@ -19,9 +29,9 @@ const Header = () => {
         /> */}
       </div>
 
-      <div className={styles.middle}>
+      <div className={styles.middle} >
         <img src={MiddleLogo} />
-        <div className={styles.text}>HealthConnect</div>
+        <div className={styles.text} onClick={goHome} style={{ cursor: 'pointer' }}>HealthConnect</div>
       </div>
       <div className={styles.notification}>
         {/* <img className={styles.bell} alt="Notification" src={Bell} /> */}

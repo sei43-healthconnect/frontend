@@ -1,35 +1,34 @@
 import React from "react";
+import { useContext, useState } from "react";
 import styles from "./HomePage.module.css";
 import StaffDisplay from "./StaffDisplay";
-import UserContext from "../context/user";
 import FamilyPatient from "./FamilyPatient";
-import { useContext, useState } from "react";
 import PatientDetails from "./PatientDetails";
 import ChatPage from "./ChatPage";
+import UserContext from "../context/user";
+import PageContext from "../context/page"
+
 
 const HomePage = () => {
   const userCtx = useContext(UserContext);
-  const [showPatientDetails, setShowPatientDetails] = useState(false);
-  const [showChat, setShowChat] = useState(false);
+  const pageCtx = useContext(PageContext);
 
   return (
     <div className={styles.HomePage}>
-      {userCtx.role == "staff" && !showChat && !showPatientDetails && (
+      {userCtx.role == "staff" && !pageCtx.showChat && !pageCtx.showPatientDetails && (
         <StaffDisplay
-          setShowChat={setShowChat}
-          setShowPatientDetails={setShowPatientDetails}
+          setShowPatientDetails={pageCtx.setShowPatientDetails}
         />
       )}
-      {userCtx.role == "contact" && !showChat && !showPatientDetails && (
+      {userCtx.role == "contact" && !pageCtx.showChat && !pageCtx.showPatientDetails && (
         <FamilyPatient
-          setShowChat={setShowChat}
-          setShowPatientDetails={setShowPatientDetails}
+          setShowPatientDetails={pageCtx.setShowPatientDetails}
         />
       )}
-      {userCtx.authorised && showPatientDetails && !showChat && (
+      {userCtx.authorised && pageCtx.showPatientDetails && !pageCtx.showChat && (
         <PatientDetails />
       )}
-      {showChat && <ChatPage />}
+      {pageCtx.showChat && <ChatPage />}
     </div>
   );
 };
