@@ -52,7 +52,10 @@ const StaffDisplay = () => {
     <>
       <div>
         {showWards && (
-          <StaffWards handleWardClick={handleWardClick}></StaffWards>
+          <StaffWards
+            handleWardClick={handleWardClick}
+            setSelectedWard={setSelectedWard}
+          ></StaffWards>
         )}
       </div>
       <div>

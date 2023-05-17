@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { fetchData } from "../helpers/common";
 import { Avatar } from "@mui/material";
 import styles from "./StaffWards.module.css";
@@ -8,6 +8,7 @@ const StaffWards = (props) => {
   const [wardToAdd, setWardToAdd] = useState();
   const [showAddWard, setShowAddWard] = useState(false);
   const [staffWards, setStaffWards] = useState([]);
+  const didMount = useRef(false);
 
   // GET a staff by his NRIC Number
   const getStaffByNric = async () => {
@@ -24,16 +25,16 @@ const StaffWards = (props) => {
   };
 
   // PATCH new ward number to the staff document
-  const updateStaff = async (id) => {
+  const updateStaffWardNumber = async (id) => {
     const { ok, data } = await fetchData("/api/staff/" + id, "PATCH", {
-      staff_hospitalId: staff.staff_hospitalId,
-      staff_firstName: staff.staff_firstName,
-      staff_lastName: staff.staff_lastName,
-      staff_gender: staff.staff_gender,
-      staff_nric: staff.staff_nric,
-      staff_photo: staff.staff_photo,
+      // staff_hospitalId: staff.staff_hospitalId,
+      // staff_firstName: staff.staff_firstName,
+      // staff_lastName: staff.staff_lastName,
+      // staff_gender: staff.staff_gender,
+      // staff_nric: staff.staff_nric,
+      // staff_photo: staff.staff_photo,
       staff_ward: staffWards,
-      staff_password: staff.staff_password,
+      // staff_password: staff.staff_password,
     });
 
     if (ok) {
@@ -44,14 +45,27 @@ const StaffWards = (props) => {
 
   // needs finishing, but not priority 1...
   const handleAddWard = (event) => {
-    props.setSelectedWard(event.target.value);
-    console.log(event);
-    console.log("selected ward: ", event.target.value);
+    const wardAsNumber = parseInt(wardToAdd);
+    if (staffWards.includes(wardAsNumber)) {
+      return;
+    }
+    setStaffWards([...staffWards, wardAsNumber]);
+
+    setWardToAdd("");
+    setShowAddWard(false);
   };
 
   useEffect(() => {
     getStaffByNric();
   }, []);
+
+  useEffect(() => {
+    if (didMount.current) {
+      updateStaffWardNumber();
+    } else {
+      didMount.current = true;
+    }
+  }, [staffWards]);
 
   return (
     <>
@@ -104,16 +118,8 @@ const StaffWards = (props) => {
             </div>
           </button>
         )}
-        <div>
-          {false && wardToAdd && (
-            <button className={styles.AddButton} onClick={handleAddWard}>
-              <div className={styles.layer}>
-                <div className={styles.text}>OK</div>
-              </div>
-            </button>
-          )}
-        </div>
-        {false && (
+
+        {showAddWard && (
           <input
             className={styles.layer}
             type="text"
@@ -123,6 +129,15 @@ const StaffWards = (props) => {
             }}
           />
         )}
+        <div>
+          {wardToAdd && (
+            <button className={styles.AddButton} onClick={handleAddWard}>
+              <div className={styles.layer}>
+                <div className={styles.text}>OK</div>
+              </div>
+            </button>
+          )}
+        </div>
       </div>
     </>
   );
