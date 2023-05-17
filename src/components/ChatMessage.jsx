@@ -7,6 +7,7 @@ const ChatMessage = (props) => {
   const [read, setRead] = useState()
   const userDetails = useContext(UserContext)
   const messageDetails = props.message
+  const [fromUser, setFromUser] = useState(messageDetails.msg_senderId._id == userDetails.user._id['$oid'])
 
   const readMessage = async() => {
     const { ok, data } = await fetchData('/api/chats/' + messageDetails._id, "PATCH", {
@@ -23,7 +24,7 @@ const ChatMessage = (props) => {
   }
 
   const handleClick = () => {
-    if (!(messageDetails.msg_senderId == userDetails.userID)) {
+    if (!fromUser) {
       readMessage()
     }
   }
@@ -35,16 +36,15 @@ const ChatMessage = (props) => {
 
   var messageBoxStyling = {}
   
-  if (messageDetails.msg_senderId._id == userDetails.user._id['$oid']) {
+  if (fromUser) {
     messageBoxStyling['marginLeft'] = 'auto'
-    console.log('hi')
   } else {
     messageBoxStyling['marginRight'] = 'auto'
-    console.log('bye')
   }
+
+  // CHECK LOGS
   console.log('usecxt', userDetails.user)
   console.log('fetch', messageDetails.msg_senderId)
-
   console.log(`check
   fet ${messageDetails.msg_senderId._id}
   ctx ${userDetails.user._id['$oid']}`)
@@ -64,8 +64,12 @@ const ChatMessage = (props) => {
   return (
     <div className={styles["main-container"]}>
       
-        <div className={styles["message-details"]} style={ messageDetails.msg_senderId._id == userDetails.user._id['$oid'] ? { marginLeft: 'auto'} : {marginRight : 'auto'} }  >
-          <div className={styles["sender"]}>{messageDetails.msg_senderId.firstName} {messageDetails.msg_senderId.lastName}</div>
+        <div className={styles["message-details"]} style={ fromUser ? { marginLeft: 'auto'} : {marginRight : 'auto'} }  >
+          
+          { // name only shows if the sender is not the user
+            !fromUser && (
+            <div className={styles["sender"]}>{messageDetails.msg_senderId.firstName} {messageDetails.msg_senderId.lastName}</div>
+          )}
           <div className={styles["message-text"]} style={messageBoxStyling}>{messageDetails.msg_content}</div>
           <div className={styles["time-stamp"]}>
             <input

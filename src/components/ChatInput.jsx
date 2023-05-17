@@ -40,7 +40,7 @@ const ChatInput = (props) => {
   return (
     <div className={ styles['main-container'] }>
       <Stack direction="row" spacing={1} >
-        <Button
+        {/* <Button
           variant="contained"
           sx={{
             width: 90,
@@ -57,7 +57,7 @@ const ChatInput = (props) => {
           }}
         >
           + Quick Text
-        </Button>
+        </Button> */}
         <TextField
           id="outlined-basic"
           placeholder="Type a message..."
