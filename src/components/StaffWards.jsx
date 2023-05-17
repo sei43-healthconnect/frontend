@@ -57,7 +57,7 @@ const StaffWards = (props) => {
     <>
       <div className={styles.StaffDisplay}>
         <Avatar
-          alt="Nurse1"
+          alt={`${staff.staff_fistName}" "${staff.staff_fistName}`}
           src={staff.staff_photo}
           sx={{ width: 96, height: 96 }}
         />
@@ -105,7 +105,7 @@ const StaffWards = (props) => {
           </button>
         )}
         <div>
-          {false && wardToAdd && (
+          {true && wardToAdd && (
             <button className={styles.AddButton} onClick={handleAddWard}>
               <div className={styles.layer}>
                 <div className={styles.text}>OK</div>
@@ -113,7 +113,7 @@ const StaffWards = (props) => {
             </button>
           )}
         </div>
-        {false && (
+        {true && (
           <input
             className={styles.layer}
             type="text"
