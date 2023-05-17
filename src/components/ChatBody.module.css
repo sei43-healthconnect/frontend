@@ -2,5 +2,5 @@
   width: 100%;
   flex: 0 1 580px;
   background-color: #FFFFFF;
-  overflow: scroll;
+  overflow: auto;
 }
