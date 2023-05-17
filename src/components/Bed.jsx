@@ -9,9 +9,11 @@ import PatientDetails from "./PatientDetails";
 const Bed = (props) => {
   const userCtx = useContext(UserContext);
   const [showPatientMenu, setShowPatientMenu] = useState(true);
+  const [showPatientDetails, setShowPatientDetails] = useState(false);
 
   const handleClickPatientDetails = () => {
-    setShowPatientMenu((prevState) => !prevState);
+    setShowPatientMenu(false);
+    setShowPatientDetails(true);
   };
 
   return (
@@ -67,7 +69,7 @@ const Bed = (props) => {
         </div>
       )}
 
-      <PatientDetails></PatientDetails>
+      {showPatientDetails && <PatientDetails></PatientDetails>}
     </>
   );
 };

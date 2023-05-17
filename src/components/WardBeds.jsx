@@ -56,7 +56,8 @@ const WardBeds = (props) => {
                       sx={{ width: 72, height: 72 }}
                     />
                   </div>
-                  {item.patient_firstName} {item.patient_lastName}
+                  {item.patient_firstName} <br />
+                  {item.patient_lastName}
                 </div>
               </Grid>
             );
