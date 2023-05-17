@@ -8,11 +8,11 @@ import SubHeader from "./components/SubHeader";
 import HomePage from "./components/HomePage";
 
 function App() {
-  // current user's unique ID in db
-  const [userID, setUserID] = useState(""); // this is a string of the user's _id in the db
+  // current user's Object
+  const [user, setUser] = useState({}); 
 
   // set on login
-  const [role, setRole] = useState(""); // 'staff' or 'contact'
+  const [role, setRole] = useState(''); // 'staff' or 'contact'
 
   // for staff - this will be set after Ward+Bed are selected
   // for contact - this will be set after login
@@ -23,8 +23,8 @@ function App() {
     <>
       <UserContext.Provider
         value={{
-          userID,
-          setUserID,
+          user,
+          setUser,
           role,
           setRole,
           patient,
@@ -42,11 +42,22 @@ function App() {
               flexFlow: "column",
             }}
           >
-            <Header />
-            <SubHeader />
-            <HomePage />
-            {/* <FamilyPatient /> */}
-            {/* <ChatPage /> */}
+          { !role && (
+            <Login />
+          )
+          }
+
+          { role && (
+            <>
+              <Header />
+              <SubHeader />          
+              <HomePage />
+            </>
+          )}
+
+          {/* <FamilyPatient />
+          <ChatPage />  */}
+
           </div>
         </div>
       </UserContext.Provider>
