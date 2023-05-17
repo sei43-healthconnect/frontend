@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import UserContext from './context/user'
+import UserContext from "./context/user";
 import ChatPage from "./components/ChatPage";
 import ChatInput from "./components/ChatInput";
 import HomePage from "./components/HomePage";
@@ -7,36 +7,48 @@ import FamilyPatient from "./components/FamilyPatient";
 import Header from "./components/Header";
 import SubHeader from "./components/SubHeader";
 
-
 function App() {
   // current user's unique ID in db
-  const [userID, setUserID] = useState('')
+  const [userID, setUserID] = useState("");
 
   // staff or contact
-  const [role, setRole] = useState('')
+  const [role, setRole] = useState("");
 
   // for staff - this will be set after Ward+Bed are selected
   // for contact - this will be set after login
-  const [patientNRIC, setPatientNRIC] = useState('')
+  const [patient, setPatient] = useState([]);
+  const [patientNOK, setPatientNOK] = useState("");
 
   return (
     <>
-      <UserContext.Provider value={({userID, setUserID, role, setRole, patientNRIC, setPatientNRIC})}>
-      <div className="centered">
-        <div style={{
-          width: '420px',
-          height: '100vh',
-          display: 'flex',
-          flexFlow: 'column'
-        }}>
-          <Header />
-          <SubHeader />
-          <HomePage />
-          {/* <FamilyPatient />
+      <UserContext.Provider
+        value={{
+          userID,
+          setUserID,
+          role,
+          setRole,
+          patient,
+          setPatient,
+          patientNOK,
+          setPatientNOK,
+        }}
+      >
+        <div className="centered">
+          <div
+            style={{
+              width: "420px",
+              height: "100vh",
+              display: "flex",
+              flexFlow: "column",
+            }}
+          >
+            <Header />
+            <SubHeader />
+            <HomePage />
+            {/* <FamilyPatient />
           <ChatPage />  */}
-
+          </div>
         </div>
-      </div>
       </UserContext.Provider>
     </>
   );

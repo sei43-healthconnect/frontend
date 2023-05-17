@@ -91,7 +91,7 @@ const FamilyPatient = () => {
         </div>
         <div className={styles.ButtonBox}>
           <div className={styles.Button2Box}>
-            <Badge badgeContent={10} color='primary'>
+            <Badge badgeContent={10} color="primary">
               <div className={styles.MessageStaffBox}>
                 <div className={styles.MessageStaffText}>Message Staff</div>
               </div>
