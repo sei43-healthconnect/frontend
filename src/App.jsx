@@ -32,7 +32,8 @@ function App() {
   const [selectedBed, setSelectedBed] = useState('')
   
   const [currentPage, setCurrentPage] = useState('')
-  //
+  
+  // states to render the pages 
   const pages = {
     "Home Page": [false, false, false, false, true, true, '', ''],
     "Ward Page": [true, false, false, false, true, false, selectedWard, ''],

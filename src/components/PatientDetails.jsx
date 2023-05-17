@@ -97,11 +97,14 @@ const PatientDetails = () => {
   pageCtx.setCurrentPage("Patient Details")
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 96px)'}}>
       <BedPatientHeader />
       <div
         style={{
           padding: "0px 20px",
+          paddingBottom: "20px",
+          overflow: 'scroll',
+          flexGrow: 1,
         }}
       >
         <div
@@ -118,7 +121,6 @@ const PatientDetails = () => {
           style={{
             padding: "10px 0 0 0 ",
             overflowY: "scroll",
-            height: "264px",
           }}
         >
           <Stack spacing={5}>
