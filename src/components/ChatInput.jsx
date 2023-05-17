@@ -11,8 +11,8 @@ const ChatInput = (props) => {
 
   const putChat = async() => {
     const { ok, data } = await fetchData('/api/chats/', "PUT", {
-      chat_id: userCtx.patient._id['$oid'],
-      msg_senderId: userCtx.user._id['$oid'],
+      chat_id: userCtx.patient._id,
+      msg_senderId: userCtx.user._id,
       role: userCtx.role == 'staff' ? 'Staff' : 'Contacts',
       msg_fromNurse: userCtx.role == 'staff' ? true: false,
       msg_isRead: false,

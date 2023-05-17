@@ -130,7 +130,6 @@
   align-items: flex-start;
   padding: 0px;
 
-  width: 96px;
   height: 44px;
 
   /* Inside auto layout */
@@ -142,7 +141,6 @@
 .PatientName {
   /* Patient Name */
 
-  width: 85px;
   height: 20px;
 
   /* M3/body/medium */
@@ -169,7 +167,6 @@
 .PatientNameText {
   /* Kah Poh Tian */
 
-  width: 96px;
   height: 24px;
 
   font-family: "Roboto";

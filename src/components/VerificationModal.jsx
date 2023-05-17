@@ -10,8 +10,10 @@ const OverLay = (props) => {
 
   const handleConfirmPatient = (event) => {
     if (inputRef.current.value === userCtx.patient.patient_nric) {
+      userCtx.setAuthorised(true);
       props.setShowVerificationModal(false);
-      props.setAuthorised(true);
+    } else {
+      props.setShowPatientDetails(false);
     }
   };
 

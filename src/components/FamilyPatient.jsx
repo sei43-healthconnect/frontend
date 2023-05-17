@@ -1,33 +1,58 @@
 import React, { useContext, useState, useEffect } from "react";
 import styles from "./FamilyPatient.module.css";
 import { Avatar, Badge } from "@mui/material";
-import Patient1 from "./Images/Patient1.png";
 import { fetchData } from "../helpers/common";
 import VerificationModal from "./VerificationModal";
 import UserContext from "../context/user";
 
-const FamilyPatient = () => {
+const FamilyPatient = (props) => {
   const userCtx = useContext(UserContext);
-  // const [selectedPatient, setSelectedPatient] = useState("");
-  // const [staffs, setStaffs] = useState([]);
   const [showVerificationModal, setShowVerificationModal] = useState(false);
   const [authorised, setAuthorised] = useState(false);
 
+  const getPatient = async () => {
+    const { ok, data } = await fetchData("/api/patients/nric", "POST", {
+      patient_nric: userCtx.user.contact_patientNric,
+    });
+
+    if (ok) {
+      userCtx.setPatient(data);
+    } else {
+      console.log(data);
+    }
+  };
+
   const handleModal = (event) => {
     setShowVerificationModal(true);
+    if (userCtx.authorised) {
+      props.setShowPatientDetails(true);
+    }
+  };
+
+  const handleChatModal = (event) => {
+    setShowVerificationModal(true);
+    if (userCtx.authorised) {
+      props.setShowChat(true);
+    }
   };
 
   const handleCloseModal = (event) => {
     setShowVerificationModal(false);
   };
 
+  useEffect(() => {
+    getPatient();
+  }, []);
+
+  console.log(userCtx.patient);
   return (
     <>
-      {showVerificationModal && !authorised && (
+      {showVerificationModal && !userCtx.authorised && (
         <VerificationModal
           setShowVerificationModal={setShowVerificationModal}
           handleCloseModal={handleCloseModal}
           setAuthorised={setAuthorised}
+          setShowPatientDetails={props.setShowPatientDetails}
         />
       )}
       <div className={styles.FamilyPatient}>
@@ -45,9 +70,7 @@ const FamilyPatient = () => {
               <div className={styles.PatientNameBox}>
                 <div className={styles.PatientName}>Patient Name</div>
                 <div className={styles.PatientNameText}>
-                  {userCtx.patient.patient_firstName}
-                  {userCtx.patient.patient_lastName}
-                  {/* Kah Poh Tian */}
+                  {`${userCtx.patient.firstName} ${userCtx.patient.lastName}`}
                 </div>
               </div>
               <div className={styles.HospitalDetailsBox}>
@@ -75,7 +98,7 @@ const FamilyPatient = () => {
               <Badge badgeContent={10} color="primary">
                 <button
                   className={styles.MessageStaffBox}
-                  onClick={handleModal}
+                  onClick={handleChatModal}
                 >
                   <div className={styles.MessageStaffText}>Message Staff</div>
                 </button>

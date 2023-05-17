@@ -60,10 +60,6 @@ const PatientDetails = () => {
     padding: "0px 4px",
   };
 
-  console.log("role", userCtx.role);
-
-  userCtx.setRole("staff");
-
   return (
     <div
       style={{
@@ -88,9 +84,9 @@ const PatientDetails = () => {
               First Name
             </InputLabel>
             <OutlinedInput
-              id="patient_firstName"
+              id="firstName"
               type="text"
-              value={userCtx.patient.patient_firstName}
+              value={userCtx.patient.firstName}
               label="First Name"
               disabled={true}
             />
@@ -101,9 +97,9 @@ const PatientDetails = () => {
               Last Name
             </InputLabel>
             <OutlinedInput
-              id="Last Name"
+              id="lastName"
               type="text"
-              value={userCtx.patient.patient_lastName}
+              value={userCtx.patient.lastName}
               label="Last Name"
               disabled={true}
             />

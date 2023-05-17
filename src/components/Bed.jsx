@@ -16,6 +16,23 @@ const Bed = (props) => {
     setShowPatientDetails(true);
   };
 
+  const getPatientNOK = async () => {
+    const { ok, data } = await fetchData("/api/contacts/nric", "POST", {
+      contact_patientNric: userCtx.patient.patient_nric,
+    });
+
+    if (ok) {
+      userCtx.setPatientNOK(data);
+    } else {
+      console.log(data);
+    }
+  };
+
+  const handleSendMsgClick = () => {
+    getPatientNOK();
+    props.setShowChat(true);
+  };
+
   return (
     <>
       <div>
@@ -40,8 +57,7 @@ const Bed = (props) => {
                 />
               </div>
               <div className={styles["patientHeaderName"]}>
-                {userCtx.patient.patient_firstName}{" "}
-                {userCtx.patient.patient_lastName}
+                {userCtx.patient.firstName} {userCtx.patient.lastName}
               </div>
             </div>
           </Grid>
@@ -52,11 +68,16 @@ const Bed = (props) => {
         <div className={styles.patientMenu}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <button className={styles.AddButton}>Send Message</button>
+              <button
+                className={styles.AddButton}
+                onClick={() => handleSendMsgClick()}
+              >
+                Send Message
+              </button>
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <button className={styles.AddButtonLight}>Add Team Member</button>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <button
                 className={styles.AddButtonLight}

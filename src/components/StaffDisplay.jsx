@@ -6,7 +6,7 @@ import WardBeds from "./WardBeds";
 import Bed from "./Bed";
 import UserContext from "../context/user";
 
-const StaffDisplay = () => {
+const StaffDisplay = (props) => {
   const [showWards, setShowWards] = useState(true);
   const [showBeds, setShowBeds] = useState(false);
   const [showPatient, setShowPatient] = useState(false);
@@ -18,15 +18,15 @@ const StaffDisplay = () => {
 
   const userCtx = useContext(UserContext);
 
-  // GET all patients
-  const getAllPatients = async () => {
-    const { ok, data } = await fetchData("/api/patients");
-    if (ok) {
-      setAllPatients(data);
-    } else {
-      console.log(data);
-    }
-  };
+  // // GET all patients
+  // const getAllPatients = async () => {
+  //   const { ok, data } = await fetchData("/api/patients");
+  //   if (ok) {
+  //     setAllPatients(data);
+  //   } else {
+  //     console.log(data);
+  //   }
+  // };
 
   // Once a ward is clicked, the number is stored in selectedWard, and the ward component is hidden
   const handleWardClick = (event) => {
@@ -44,9 +44,9 @@ const StaffDisplay = () => {
     setShowPatient((prevState) => !prevState);
   };
 
-  useEffect(() => {
-    getAllPatients();
-  }, []);
+  // useEffect(() => {
+  //   getAllPatients();
+  // }, []);
 
   return (
     <>
@@ -68,7 +68,12 @@ const StaffDisplay = () => {
       </div>
       <div>
         {showPatient && (
-          <Bed selectedWard={selectedWard} selectedBed={selectedBed}></Bed>
+          <Bed
+            setShowChat={props.setShowChat}
+            setShowPatientDetails={props.setShowPatientDetails}
+            selectedWard={selectedWard}
+            selectedBed={selectedBed}
+          ></Bed>
         )}
       </div>
     </>
