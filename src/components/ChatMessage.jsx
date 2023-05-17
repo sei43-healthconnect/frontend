@@ -4,7 +4,6 @@ import UserContext from "../context/user"
 import { fetchData } from "../helpers/common";
 
 const ChatMessage = (props) => {
-  const [senderName, setSenderName] = useState('')
   const [read, setRead] = useState()
   const userDetails = useContext(UserContext)
   const messageDetails = props.message
@@ -36,12 +35,19 @@ const ChatMessage = (props) => {
 
   var messageBoxStyling = {}
   
-  if (messageDetails.msg_senderId === userDetails.userID) {
+  if (messageDetails.msg_senderId._id == userDetails.user._id['$oid']) {
     messageBoxStyling['marginLeft'] = 'auto'
+    console.log('hi')
   } else {
     messageBoxStyling['marginRight'] = 'auto'
+    console.log('bye')
   }
+  console.log('usecxt', userDetails.user)
+  console.log('fetch', messageDetails.msg_senderId)
 
+  console.log(`check
+  fet ${messageDetails.msg_senderId._id}
+  ctx ${userDetails.user._id['$oid']}`)
   if (messageDetails.msg_fromNurse) {
     messageBoxStyling['borderColor'] = '#337E97';
     messageBoxStyling['backgroundColor'] = '#CCDFE5'
@@ -58,8 +64,8 @@ const ChatMessage = (props) => {
   return (
     <div className={styles["main-container"]}>
       
-        <div className={styles["message-details"]} style={ messageDetails.msg_senderId === userDetails.userID ? { marginLeft: 'auto'} : {marginRight : 'auto'} }  >
-          <div className={styles["sender"]}>{messageDetails.msg_senderId}</div>
+        <div className={styles["message-details"]} style={ messageDetails.msg_senderId._id == userDetails.user._id['$oid'] ? { marginLeft: 'auto'} : {marginRight : 'auto'} }  >
+          <div className={styles["sender"]}>{messageDetails.msg_senderId.firstName} {messageDetails.msg_senderId.lastName}</div>
           <div className={styles["message-text"]} style={messageBoxStyling}>{messageDetails.msg_content}</div>
           <div className={styles["time-stamp"]}>
             <input

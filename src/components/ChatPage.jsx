@@ -4,6 +4,7 @@ import UserContext from "../context/user"
 import ChatHeader from './ChatHeader'
 import ChatInput from './ChatInput'
 import ChatBody from './ChatBody'
+import { Button } from '@mui/material'
 
 const ChatPage = () => {
   const [messages, setMessages] = useState({})
@@ -33,6 +34,7 @@ const ChatPage = () => {
       }, Object.create(null));
 
       setMessages(partitioned)
+      console.log(partitioned)
     } else {
       console.log(data)
     }
