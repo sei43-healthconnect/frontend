@@ -19,7 +19,7 @@ const ChatBody = (props) => {
           <React.Fragment key={dateKey}>
             <ChatDateHeader date={dateKey} />
             {messages[dateKey].map((message) => {
-              return (<ChatMessage id={message._id} key={message._id} message={message} setIsRead={props.setIsRead} />)
+              return (<ChatMessage id={message._id} key={message._id} message={message} unread={props.unread} setUnread={props.setUnread} />)
             })}     
           </React.Fragment>) 
         })     
