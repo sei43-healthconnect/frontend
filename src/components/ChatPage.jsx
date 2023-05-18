@@ -19,6 +19,7 @@ const ChatPage = () => {
     });
     if (ok) {
       var response = data;
+      var count = 0
       response.map((message) => {
         // adds a new 'Date' field to the output, that gives a readable Date, like May 17, 2023
         message.Date = new Date(message.msg_timeSent).toLocaleDateString(
@@ -32,10 +33,11 @@ const ChatPage = () => {
             (userCtx.role == "contact" && message.msg_fromNurse))
         ) {
           // set IsRead to update that not all 'applicable' chats are read
-          setUnread(unread++);
-          console.log(unread);
+          count++;
         }
       });
+      setUnread(count)
+      console.log(unread)
 
       // this makes a new object that sorts the data received by dates. { Date1: [{msgObj}, {msgObj}], Date2: [{msgObj}, {msgObj}, {msgObj}] }
       var partitioned = response.reduce((r, a) => {

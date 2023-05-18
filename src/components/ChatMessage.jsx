@@ -22,7 +22,7 @@ const ChatMessage = (props) => {
 
     if (ok) {
       setRead(true);
-      props.setUnread(props.unread--);
+      props.setUnread(props.unread - 1);
       console.log("set read");
     } else {
       console.log("failed to set read");
@@ -38,6 +38,7 @@ const ChatMessage = (props) => {
     ) {
       // user cannot change checkbox of the own role (staff cannot set messages from other staff as read)
       readMessage();
+      console.log(props.unread)
     }
   };
 

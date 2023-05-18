@@ -34,6 +34,7 @@ const ChatInput = (props) => {
     if (props.unread == 0) {
       putChat()
     } else {
+      console.log(props.unread)
       console.log('confirm read first')
     }
   }
