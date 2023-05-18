@@ -87,6 +87,7 @@ const PatientDetails = () => {
     });
 
     if (ok) {
+      alert("Patient details have been updated.");
     } else {
       console.log(data);
     }
@@ -94,16 +95,22 @@ const PatientDetails = () => {
 
   const updatedPatient = {};
 
-  pageCtx.setCurrentPage("Patient Details")
+  pageCtx.setCurrentPage("Patient Details");
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 96px)'}}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "calc(100vh - 96px)",
+      }}
+    >
       <BedPatientHeader />
       <div
         style={{
           padding: "0px 20px",
           paddingBottom: "20px",
-          overflow: 'scroll',
+          overflow: "scroll",
           flexGrow: 1,
         }}
       >
@@ -279,7 +286,9 @@ const PatientDetails = () => {
                 // disabled={!(user && password)}
                 variant="contained"
                 size="large"
-                onClick={updatePatient}
+                onClick={(e) => {
+                  updatePatient(userCtx.patient._id);
+                }}
               >
                 Save
               </Button>
