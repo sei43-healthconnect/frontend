@@ -9,7 +9,7 @@ import PageContext from "../context/page";
 
 const ChatPage = () => {
   const [messages, setMessages] = useState({});
-  const [isRead, setIsRead] = useState(true); // checks that all 'applicable' chats are read - if false, this will disable sending of new messages
+  const [unread, setUnread] = useState(0); // checks no. of 'applicable' chats that are unread - if >0, this will disable sending of new messages
   const userCtx = useContext(UserContext);
   const pageCtx = useContext(PageContext);
 
@@ -32,7 +32,8 @@ const ChatPage = () => {
             (userCtx.role == "contact" && message.msg_fromNurse))
         ) {
           // set IsRead to update that not all 'applicable' chats are read
-          setIsRead(false);
+          setUnread(unread++);
+          console.log(unread);
         }
       });
 
@@ -53,7 +54,7 @@ const ChatPage = () => {
     getMessages();
   }, []);
 
-  pageCtx.setCurrentPage("Chat Page")
+  pageCtx.setCurrentPage("Chat Page");
 
   return (
     <>
@@ -72,8 +73,8 @@ const ChatPage = () => {
             height: "calc(100vh - 283px)",
           }}
         >
-          <ChatInput getMessages={getMessages} isRead={isRead} />
-          <ChatBody messages={messages} setIsRead={setIsRead} />
+          <ChatInput getMessages={getMessages} unread={unread} />
+          <ChatBody messages={messages} unread={unread} setUnread={setUnread} />
         </div>
       </div>
     </>

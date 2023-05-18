@@ -22,7 +22,7 @@ const ChatMessage = (props) => {
 
     if (ok) {
       setRead(true);
-      props.setIsRead(true);
+      props.setUnread(props.unread--);
       console.log("set read");
     } else {
       console.log("failed to set read");
