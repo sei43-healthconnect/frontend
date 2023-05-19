@@ -53,7 +53,7 @@ const LoginPage = () => {
 
   return (
     <div style={{ backgroundColor: "#FFFFFF", margin: "0 auto", height: "100vh" }}>
-      <div style={{ margin: "38px 0px" }}>
+      <div style={{ margin: "38px 0px" }} onClick={()=> setRole("")}>
         <img src={HomeLogo} />
       </div>
 

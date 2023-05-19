@@ -31,9 +31,10 @@ const ChatInput = (props) => {
 
   // only allows a message to be sent if all messages from the opposite role is read
   const handleSend = () => {
-    if (props.isRead) {
+    if (props.unread == 0) {
       putChat()
     } else {
+      console.log(props.unread)
       console.log('confirm read first')
     }
   }
